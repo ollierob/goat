@@ -26,4 +26,12 @@ public class Dates {
                 + (period.getDays() / DAYS_PER_YEAR);
     }
 
+    public static boolean areOrdered(final LocalDate d1, final LocalDate d2) {
+        return !d1.isAfter(d2);
+    }
+
+    public static boolean areOrdered(final LocalDate d1, final LocalDate d2, final LocalDate d3) {
+        return areOrdered(d1, d2) && areOrdered(d2, d3);
+    }
+
 }
