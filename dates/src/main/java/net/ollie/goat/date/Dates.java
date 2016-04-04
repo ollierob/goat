@@ -2,6 +2,7 @@ package net.ollie.goat.date;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Iterator;
 
 import net.ollie.goat.functions.Functions;
 
@@ -32,6 +33,26 @@ public class Dates {
 
     public static boolean areOrdered(final LocalDate d1, final LocalDate d2, final LocalDate d3) {
         return areOrdered(d1, d2) && areOrdered(d2, d3);
+    }
+
+    public static Iterable<LocalDate> over(final LocalDate start, final LocalDate endExclusive) {
+        return () -> new Iterator<LocalDate>() {
+
+            private LocalDate current = start;
+
+            @Override
+            public boolean hasNext() {
+                return current.isBefore(endExclusive);
+            }
+
+            @Override
+            public LocalDate next() {
+                LocalDate next = current;
+                current = next.plusDays(1);
+                return next;
+            }
+
+        };
     }
 
 }
