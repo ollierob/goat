@@ -6,10 +6,10 @@
         <artifactId>goat</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    
-    <name>goat-dates</name>
-    <artifactId>goat-dates</artifactId>
+    <artifactId>goat-numeric</artifactId>
     <packaging>jar</packaging>
+    <name>goat-numeric</name>
+    
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -17,9 +17,10 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>goat-numeric</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6</version>
         </dependency>
     </dependencies>
+    
 </project>

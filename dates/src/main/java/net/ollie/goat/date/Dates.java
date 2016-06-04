@@ -18,7 +18,7 @@ public class Dates {
     }
 
     public static boolean equals(final LocalDate left, final LocalDate right) {
-        return Functions.ifBothNonNull(left, right, (final LocalDate l, final LocalDate r) -> l.compareTo(r) == 0);
+        return Functions.ifBothNonNull(left, right, (final LocalDate l, final LocalDate r) -> l == r || l.compareTo(r) == 0);
     }
 
     public static double approximateLength(final Period period) {
