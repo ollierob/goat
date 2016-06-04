@@ -19,6 +19,9 @@ import net.ollie.goat.temporal.date.Dates;
  */
 public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summable<Years> {
 
+    Years ZERO = IntegerYears.ZERO;
+    Years ONE = IntegerYears.ONE;
+
     Period toPeriod(double daysPerYear);
 
     default Period toPeriod() {

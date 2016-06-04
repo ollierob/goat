@@ -18,8 +18,8 @@ public class IntegerYears implements Years {
 
     private static final long serialVersionUID = 1L;
 
-    private static final IntegerYears ZERO = new IntegerYears(0);
-    private static final IntegerYears ONE = new IntegerYears(1);
+    static final IntegerYears ZERO = new IntegerYears(0);
+    static final IntegerYears ONE = new IntegerYears(1);
 
     public static IntegerYears of(final int years) {
         switch (years) {

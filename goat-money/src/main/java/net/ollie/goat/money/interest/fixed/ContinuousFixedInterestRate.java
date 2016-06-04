@@ -1,17 +1,11 @@
 package net.ollie.goat.money.interest.fixed;
 
-import net.ollie.goat.money.interest.fixed.FixedInterestRate;
-
-import java.time.LocalDate;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-
-import net.ollie.goat.money.currency.Currency;
-import net.ollie.goat.temporal.date.years.Years;
 import net.ollie.goat.money.Money;
-import net.ollie.goat.temporal.date.count.AccrualFactor;
+import net.ollie.goat.money.currency.Currency;
+import net.ollie.goat.money.interest.accrual.InterestAccrual;
 import net.ollie.goat.numeric.percentage.Percentage;
+import net.ollie.goat.temporal.date.count.DateArithmetic;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
@@ -19,50 +13,27 @@ import net.ollie.goat.numeric.percentage.Percentage;
  */
 public class ContinuousFixedInterestRate extends FixedInterestRate {
 
-    @XmlAttribute(name = "rate")
-    private Percentage annualRate;
-
-    @XmlElementRef(name = "accrual")
-    private AccrualFactor accrual;
-
     @Deprecated
     ContinuousFixedInterestRate() {
     }
 
-    public ContinuousFixedInterestRate(final Percentage rate, final AccrualFactor accrual) {
-        this.annualRate = rate;
-        this.accrual = accrual;
+    public ContinuousFixedInterestRate(final Percentage rate, final DateArithmetic accrual) {
+        super(rate, accrual);
     }
 
     @Override
-    public Percentage annualRate() {
-        return annualRate;
-    }
-
-    @Override
-    public AccrualFactor accrual() {
-        return accrual;
-    }
-
-    @Override
-    public <C extends Currency> Money<C> accrue(final Money<C> money, final LocalDate start, final LocalDate accrualDate) {
-        return accrueContinuously(money, annualRate, start, accrualDate, accrual);
-    }
-
-    public static <C extends Currency> Money<C> accrueContinuously(final Money<C> amount, final Percentage annualRate, final LocalDate start, final LocalDate accrualDate, final AccrualFactor accrual) {
-        final Years years = accrual.yearsBetween(start, accrualDate);
-        final double multiplier = Math.exp(annualRate.doubleValue() * years.doubleValue());
-        return amount.times(multiplier);
+    public <C extends Currency> Money<C> accrue(final Money<C> money, final Years years) {
+        return InterestAccrual.continuous().accrue(money, this.annualRate(), years);
     }
 
     @Override
     public ContinuousFixedInterestRate with(final Percentage rate) {
-        return new ContinuousFixedInterestRate(rate, accrual);
+        return new ContinuousFixedInterestRate(rate, this.dateArithmetic());
     }
 
     @Override
     public String toString() {
-        return "continuous@" + annualRate;
+        return "continuous@" + this.annualRate();
     }
 
 }

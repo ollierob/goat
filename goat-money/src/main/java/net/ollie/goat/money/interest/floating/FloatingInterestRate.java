@@ -1,23 +1,59 @@
 package net.ollie.goat.money.interest.floating;
 
-import java.math.MathContext;
 import java.time.LocalDate;
 
-import javax.xml.bind.annotation.XmlTransient;
+import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import net.ollie.goat.money.Money;
 import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.interest.InterestRate;
 import net.ollie.goat.numeric.percentage.Percentage;
-import net.ollie.goat.temporal.date.Dates;
+import net.ollie.goat.temporal.date.count.DateArithmetic;
 import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
  * @author Ollie
  */
-@XmlTransient
+@XmlRootElement
 public abstract class FloatingInterestRate implements InterestRate {
+
+    @XmlAttribute(name = "date", required = true)
+    private LocalDate referenceDate;
+
+    @XmlElementRef(name = "dates")
+    private DateArithmetic dates;
+
+    @Deprecated
+    protected FloatingInterestRate() {
+    }
+
+    protected FloatingInterestRate(final LocalDate referenceDate, final DateArithmetic dates) {
+        this.referenceDate = referenceDate;
+        this.dates = dates;
+    }
+
+    @Nonnull
+    public LocalDate referenceDate() {
+        return referenceDate;
+    }
+
+    @Override
+    public DateArithmetic dateArithmetic() {
+        return dates;
+    }
+
+    protected Years yearsUntil(final LocalDate date) {
+        return dates.yearsBetween(referenceDate, date);
+    }
+
+    @Override
+    public Percentage spot(final LocalDate end) {
+        return this.forward(this.referenceDate(), end);
+    }
 
     @Override
     public <C extends Currency> Money<C> accrue(final Money<C> money, final LocalDate start, final LocalDate end) {
@@ -25,33 +61,10 @@ public abstract class FloatingInterestRate implements InterestRate {
         return this.accrue(money, impliedForwardRate, start, end);
     }
 
-    @Override
-    public Percentage forward(final LocalDate start, final LocalDate end) {
-        final LocalDate spot = this.spot();
-        if (Dates.equals(spot, start)) {
-            return this.spot(end);
-        }
-        final Years d1 = this.term(spot, start);
-        final Percentage r1 = this.rateOver(d1);
-        final Years d2 = this.term(spot, end);
-        final Percentage r2 = this.rateOver(d2);
-        final Years term = this.term(start, end);
-        return (r2.times(d2.decimalValue()).minus(r1.times(d2.decimalValue()))).over(term.decimalValue(), MathContext.DECIMAL128);
-    }
-
-    public abstract LocalDate spot();
-
     protected abstract <C extends Currency> Money<C> accrue(Money<C> money, Percentage forwardRate, LocalDate start, LocalDate end);
 
-    public abstract Percentage rateOver(Years term);
-
     protected final Years term(final LocalDate start, final LocalDate end) {
-        return this.accrual().yearsBetween(start, end);
-    }
-
-    @Override
-    public Percentage spot(final LocalDate date) {
-        return this.rateOver(this.term(this.spot(), date));
+        return this.dateArithmetic().yearsBetween(start, end);
     }
 
 }

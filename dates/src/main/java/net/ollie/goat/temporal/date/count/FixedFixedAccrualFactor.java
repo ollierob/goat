@@ -14,7 +14,7 @@ import net.ollie.goat.temporal.date.years.Years;
  * @author ollie
  */
 @XmlEnum
-public enum FixedFixedAccrualFactor implements AccrualFactor {
+public enum FixedFixedAccrualFactor implements DateArithmetic {
 
     @XmlEnumValue("30_360")
     THIRTY_THREESIXTY(30, 360) {

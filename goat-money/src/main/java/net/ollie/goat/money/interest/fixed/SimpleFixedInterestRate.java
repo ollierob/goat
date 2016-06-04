@@ -1,19 +1,13 @@
 package net.ollie.goat.money.interest.fixed;
 
-import net.ollie.goat.money.interest.fixed.FixedInterestRate;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.money.currency.Currency;
-import net.ollie.goat.temporal.date.years.Years;
 import net.ollie.goat.money.Money;
-import net.ollie.goat.temporal.date.count.AccrualFactor;
+import net.ollie.goat.money.currency.Currency;
+import net.ollie.goat.money.interest.accrual.InterestAccrual;
 import net.ollie.goat.numeric.percentage.Percentage;
+import net.ollie.goat.temporal.date.count.DateArithmetic;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
@@ -22,50 +16,27 @@ import net.ollie.goat.numeric.percentage.Percentage;
 @XmlRootElement
 public class SimpleFixedInterestRate extends FixedInterestRate {
 
-    @XmlAttribute(name = "rate")
-    private Percentage rate;
-
-    @XmlElementRef(name = "accrual")
-    private AccrualFactor accrual;
-
     @Deprecated
     SimpleFixedInterestRate() {
     }
 
-    public SimpleFixedInterestRate(final Percentage rate, final AccrualFactor accrual) {
-        this.rate = rate;
-        this.accrual = accrual;
-    }
-
-    @Override
-    public Percentage annualRate() {
-        return rate;
-    }
-
-    @Override
-    public AccrualFactor accrual() {
-        return accrual;
-    }
-
-    @Override
-    public <C extends Currency> Money<C> accrue(final Money<C> money, final LocalDate start, final LocalDate accrualDate) {
-        final Years years = accrual.yearsBetween(start, accrualDate);
-        return this.accrue(money, years);
-    }
-
-    public <C extends Currency> Money<C> accrue(final Money<C> money, final Years years) {
-        final BigDecimal multiplier = BigDecimal.ONE.add(rate.decimalValue().multiply(years.decimalValue()));
-        return money.times(multiplier);
+    public SimpleFixedInterestRate(final Percentage rate, final DateArithmetic accrual) {
+        super(rate, accrual);
     }
 
     @Override
     public SimpleFixedInterestRate with(final Percentage rate) {
-        return new SimpleFixedInterestRate(rate, accrual);
+        return new SimpleFixedInterestRate(rate, this.dateArithmetic());
+    }
+
+    @Override
+    public <C extends Currency> Money<C> accrue(final Money<C> money, final Years years) {
+        return InterestAccrual.simple().accrue(money, this.annualRate(), years);
     }
 
     @Override
     public String toString() {
-        return "simple@" + rate;
+        return "simple@" + this.annualRate();
     }
 
 }

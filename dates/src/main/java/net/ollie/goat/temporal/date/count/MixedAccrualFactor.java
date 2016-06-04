@@ -12,7 +12,7 @@ import net.ollie.goat.temporal.date.years.Years;
  * @author ollie
  */
 @XmlRootElement
-public class MixedAccrualFactor implements AccrualFactor {
+public class MixedAccrualFactor implements DateArithmetic {
 
     @XmlElementRef(name = "day_count")
     private DayCount dayCount;

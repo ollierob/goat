@@ -3,20 +3,48 @@ package net.ollie.goat.money.interest.fixed;
 import java.time.LocalDate;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
 
+import net.ollie.goat.money.Money;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.interest.InterestRate;
 import net.ollie.goat.numeric.percentage.Percentage;
+import net.ollie.goat.temporal.date.count.DateArithmetic;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
  * @author ollie
  */
-@XmlTransient
+@XmlRootElement
 public abstract class FixedInterestRate implements InterestRate, Comparable<FixedInterestRate> {
 
+    @XmlAttribute(name = "annual_rate")
+    private Percentage annualRate;
+
+    @XmlElementRef(name = "year_count")
+    private DateArithmetic dates;
+
+    @Deprecated
+    protected FixedInterestRate() {
+    }
+
+    protected FixedInterestRate(Percentage annualRate, DateArithmetic dates) {
+        this.annualRate = annualRate;
+        this.dates = dates;
+    }
+
     @Nonnull
-    public abstract Percentage annualRate();
+    public Percentage annualRate() {
+        return annualRate;
+    }
+
+    @Override
+    public DateArithmetic dateArithmetic() {
+        return dates;
+    }
 
     public boolean isNegative() {
         return this.annualRate().isNegative();
@@ -45,5 +73,12 @@ public abstract class FixedInterestRate implements InterestRate, Comparable<Fixe
     }
 
     public abstract FixedInterestRate with(Percentage rate);
+
+    @Override
+    public <C extends Currency> Money<C> accrue(Money<C> money, LocalDate from, LocalDate until) {
+        return this.accrue(money, this.dateArithmetic().yearsBetween(from, until));
+    }
+
+    public abstract <C extends Currency> Money<C> accrue(Money<C> money, Years yearsBetween);
 
 }

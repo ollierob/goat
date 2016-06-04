@@ -18,7 +18,7 @@ import net.ollie.goat.temporal.date.years.Years;
  * @author Ollie
  */
 @XmlEnum
-public enum ActualActualAccrualFactor implements AccrualFactor, ActualDayCount {
+public enum ActualActualAccrualFactor implements DateArithmetic, ActualDayCount {
 
     @XmlEnumValue("ACT_ACT")
     ACT_ACT,

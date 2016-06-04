@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import net.ollie.goat.money.Money;
 import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.numeric.percentage.Percentage;
-import net.ollie.goat.temporal.date.count.AccrualFactor;
+import net.ollie.goat.temporal.date.count.DateArithmetic;
 
 /**
  *
@@ -17,13 +17,19 @@ import net.ollie.goat.temporal.date.count.AccrualFactor;
 public interface InterestRate {
 
     @Nonnull
-    AccrualFactor accrual();
+    DateArithmetic dateArithmetic();
 
+    /**
+     * @return the interest rate given for a period from now until the given date.
+     */
     @Nonnull
-    Percentage spot(LocalDate fixing);
+    Percentage spot(LocalDate end);
 
+    /**
+     * @return the interest rate between the start and end dates.
+     */
     @Nonnull
-    Percentage forward(LocalDate fixing, LocalDate out);
+    Percentage forward(LocalDate start, LocalDate end);
 
     @Nonnull
     <C extends Currency> Money<C> accrue(Money<C> money, LocalDate from, LocalDate until);
