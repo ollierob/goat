@@ -26,11 +26,19 @@ public class DecimalPercentage
 
     private static final long serialVersionUID = 1L;
     public static final Percentage ZERO_PERCENT = new DecimalPercentage(BigDecimal.ZERO);
+    public static final Percentage ONE_BP = new DecimalPercentage(BigDecimal.ONE.movePointLeft(2));
     public static final Percentage ONE_PERCENT = new DecimalPercentage(BigDecimal.ONE);
     public static final Percentage ONE_HUNDRED_PERCENT = new DecimalPercentage(Numbers.ONE_HUNDRED);
 
     public static Percentage basisPoints(final int amount) {
-        return new DecimalPercentage(BigDecimal.valueOf(amount).movePointLeft(2));
+        switch (amount) {
+            case 0:
+                return ZERO_PERCENT;
+            case 1:
+                return ONE_BP;
+            default:
+                return new DecimalPercentage(BigDecimal.valueOf(amount).movePointLeft(2));
+        }
     }
 
     @XmlValue

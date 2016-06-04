@@ -2,27 +2,24 @@ package net.ollie.goat.currency;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.numeric.percentage.DecimalPercentage;
-import net.ollie.goat.numeric.percentage.Percentage;
-
 /**
+ * A monetary unit.
  *
  * @author Ollie
  */
 public interface Currency extends HasCurrency {
 
-    Percentage STANDARD_PIP = DecimalPercentage.basisPoints(1);
-
+    /**
+     * @return the character(s) that are used, for example {@code $} for US dollars.
+     */
     @Nonnull
     String symbol();
 
+    /**
+     * @return a string uniquely representing this currency.
+     */
     @Nonnull
     String uniqueSymbol();
-
-    @Nonnull
-    default Percentage pip() {
-        return STANDARD_PIP;
-    }
 
     @Override
     @Deprecated
