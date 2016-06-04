@@ -11,14 +11,14 @@ import java.math.RoundingMode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 
-import net.ollie.goat.currency.CurrencyId;
+import net.ollie.goat.currency.Currency;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
  *
  * @author Ollie
  */
-public class FractionalMoney<C extends CurrencyId>
+public class FractionalMoney<C extends Currency>
         implements Money<C>, Externalizable {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class FractionalMoney<C extends CurrencyId>
     }
 
     @Override
-    public C currencyId() {
+    public C currency() {
         return currency;
     }
 

@@ -9,7 +9,7 @@ import net.ollie.goat.numeric.percentage.Percentage;
  *
  * @author Ollie
  */
-public interface Currency extends HasCurrencyId {
+public interface Currency extends HasCurrency {
 
     Percentage STANDARD_PIP = DecimalPercentage.basisPoints(1);
 
@@ -22,6 +22,12 @@ public interface Currency extends HasCurrencyId {
     @Nonnull
     default Percentage pip() {
         return STANDARD_PIP;
+    }
+
+    @Override
+    @Deprecated
+    default Currency currency() {
+        return this;
     }
 
 }

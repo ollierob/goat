@@ -8,7 +8,7 @@ import java.io.ObjectOutput;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.currency.CurrencyId;
+import net.ollie.goat.currency.Currency;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
@@ -16,7 +16,7 @@ import net.ollie.goat.numeric.fraction.DecimalFraction;
  * @author Ollie
  */
 @XmlRootElement
-public class InverseExchangeRate<T extends CurrencyId, F extends CurrencyId>
+public class InverseExchangeRate<T extends Currency, F extends Currency>
         implements ExchangeRate<T, F>, Externalizable {
 
     private static final long serialVersionUID = 1L;

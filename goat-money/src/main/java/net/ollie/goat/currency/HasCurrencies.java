@@ -1,14 +1,16 @@
 package net.ollie.goat.currency;
 
+import java.util.Set;
+
 import javax.annotation.Nonnull;
 
 /**
  *
  * @author Ollie
  */
-public interface HasCurrencyId {
+public interface HasCurrencies {
 
     @Nonnull
-    CurrencyId currencyId();
+    Set<? extends Currency> currencies();
 
 }

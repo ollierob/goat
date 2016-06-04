@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.currency.CurrencyId;
+import net.ollie.goat.currency.Currency;
 import net.ollie.goat.numeric.Numbers;
 import static net.ollie.goat.numeric.Numbers.toBigDecimal;
 
@@ -21,16 +21,16 @@ import static net.ollie.goat.numeric.Numbers.toBigDecimal;
  * @author Ollie
  */
 @XmlRootElement
-public class DecimalMoney<C extends CurrencyId>
+public class DecimalMoney<C extends Currency>
         implements Money<C>, Externalizable {
 
     private static final long serialVersionUID = 1L;
 
-    public static <C extends CurrencyId> DecimalMoney<C> valueOf(final C currency, final Number amount) {
+    public static <C extends Currency> DecimalMoney<C> valueOf(final C currency, final Number amount) {
         return new DecimalMoney<>(currency, Numbers.toBigDecimal(amount));
     }
 
-    public static <C extends CurrencyId> DecimalMoney<C> valueOf(final C currency, final double amount) {
+    public static <C extends Currency> DecimalMoney<C> valueOf(final C currency, final double amount) {
         return new DecimalMoney<>(currency, BigDecimal.valueOf(amount));
     }
 
@@ -50,7 +50,7 @@ public class DecimalMoney<C extends CurrencyId>
     }
 
     @Override
-    public C currencyId() {
+    public C currency() {
         return currency;
     }
 

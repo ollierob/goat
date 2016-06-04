@@ -1,17 +1,22 @@
 package net.ollie.goat.money.fx;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.currency.CurrencyId;
-import net.ollie.goat.numeric.fraction.DecimalFraction;
+import net.ollie.goat.currency.Currency;
+import net.ollie.goat.currency.HasCurrencies;
 import net.ollie.goat.money.FractionalMoney;
 import net.ollie.goat.money.Money;
+import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
  *
  * @author Ollie
  */
-public interface ExchangeRate<F extends CurrencyId, T extends CurrencyId> extends Comparable<ExchangeRate<F, T>> {
+public interface ExchangeRate<F extends Currency, T extends Currency>
+        extends Comparable<ExchangeRate<F, T>>, HasCurrencies {
 
     @Nonnull
     F from();
@@ -37,6 +42,14 @@ public interface ExchangeRate<F extends CurrencyId, T extends CurrencyId> extend
     @Override
     default int compareTo(final ExchangeRate<F, T> that) {
         return this.rate().compareTo(that.rate());
+    }
+
+    @Override
+    default Set<? extends Currency> currencies() {
+        final Set<Currency> currencies = new HashSet<>(2);
+        currencies.add(this.from());
+        currencies.add(this.to());
+        return currencies;
     }
 
 }

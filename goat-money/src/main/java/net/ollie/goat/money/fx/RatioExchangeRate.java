@@ -7,15 +7,15 @@ import java.io.ObjectOutput;
 
 import javax.xml.bind.annotation.XmlElementRef;
 
-import net.ollie.goat.currency.CurrencyId;
-import net.ollie.goat.numeric.fraction.DecimalFraction;
+import net.ollie.goat.currency.Currency;
 import net.ollie.goat.money.Money;
+import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
  *
  * @author Ollie
  */
-public class RatioExchangeRate<F extends CurrencyId, T extends CurrencyId>
+public class RatioExchangeRate<F extends Currency, T extends Currency>
         implements ExchangeRate<F, T>, Externalizable {
 
     private static final long serialVersionUID = 1L;
@@ -37,12 +37,12 @@ public class RatioExchangeRate<F extends CurrencyId, T extends CurrencyId>
 
     @Override
     public F from() {
-        return from.currencyId();
+        return from.currency();
     }
 
     @Override
     public T to() {
-        return to.currencyId();
+        return to.currency();
     }
 
     @Override
