@@ -89,7 +89,7 @@ public class DecimalFraction
 
     @Override
     public DecimalFraction negate() {
-        return new DecimalFraction(numerator.negate(), denominator);
+        return of(numerator.negate(), denominator);
     }
 
     @Override
@@ -98,6 +98,7 @@ public class DecimalFraction
         return this.times(that);
     }
 
+    @Override
     public DecimalFraction times(final Number number) {
         return number instanceof DecimalFraction
                 ? this.times((DecimalFraction) number)
@@ -171,6 +172,7 @@ public class DecimalFraction
                 && this.valuesEqual((DecimalFraction) obj);
     }
 
+    @Override
     public boolean valuesEqual(final DecimalFraction that) {
         return this.minus(that).isZero();
     }

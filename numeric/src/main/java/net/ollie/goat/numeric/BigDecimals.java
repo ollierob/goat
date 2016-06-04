@@ -11,18 +11,22 @@ public abstract class BigDecimals {
     protected BigDecimals() {
     }
 
+    public static BigDecimal toBigDecimal(final int i) {
+        switch (i) {
+            case 0:
+                return BigDecimal.ZERO;
+            case 1:
+                return BigDecimal.ONE;
+            case 10:
+                return BigDecimal.TEN;
+            default:
+                return BigDecimal.valueOf(i);
+        }
+    }
+
     public static BigDecimal toBigDecimal(final Number number) {
-        if (Numbers.isNativeIntegral(number)) {
-            switch (number.intValue()) {
-                case 0:
-                    return BigDecimal.ZERO;
-                case 1:
-                    return BigDecimal.ONE;
-                case 10:
-                    return BigDecimal.TEN;
-                default:
-                    return BigDecimal.valueOf(number.longValue());
-            }
+        if (number instanceof Integer) {
+            return toBigDecimal((int) number);
         }
         return number instanceof BigDecimal
                 ? (BigDecimal) number
