@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import net.ollie.goat.collections.Maps;
+import net.ollie.goat.collection.Maps;
 import net.ollie.goat.numeric.interpolation.Interpolator;
 import net.ollie.goat.numeric.percentage.Percentage;
 

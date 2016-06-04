@@ -10,8 +10,8 @@ import java.util.TreeMap;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.collections.Maps;
-import net.ollie.goat.collections.Sets;
+import net.ollie.goat.collection.Maps;
+import net.ollie.goat.collection.Sets;
 import net.ollie.goat.date.years.Years;
 import net.ollie.goat.numeric.interpolation.Interpolator;
 import net.ollie.goat.numeric.percentage.Percentage;

@@ -1,4 +1,4 @@
-package net.ollie.goat.collections;
+package net.ollie.goat.collection.list;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,13 +12,15 @@ import static java.util.stream.Collectors.toList;
 
 import javax.annotation.CheckForNull;
 
+import net.ollie.goat.collection.Collections;
+
 /**
  *
  * @author Ollie
  */
-public final class Lists extends Collections {
+public abstract class Lists extends Collections {
 
-    private Lists() {
+    protected Lists() {
     }
 
     public static <T> List<T> copyIntoLeft(final List<T> left, final List<? extends T> right) {

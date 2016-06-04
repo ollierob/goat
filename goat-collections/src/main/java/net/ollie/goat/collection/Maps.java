@@ -1,4 +1,4 @@
-package net.ollie.goat.collections;
+package net.ollie.goat.collection;
 
 import java.util.Map;
 import java.util.function.Function;

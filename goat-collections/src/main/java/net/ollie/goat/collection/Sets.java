@@ -1,4 +1,4 @@
-package net.ollie.goat.collections;
+package net.ollie.goat.collection;
 
 import java.util.Arrays;
 import java.util.HashSet;

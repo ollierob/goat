@@ -1,4 +1,4 @@
-package net.ollie.goat.collections;
+package net.ollie.goat.collection.list;
 
 import java.util.AbstractList;
 import java.util.function.IntFunction;

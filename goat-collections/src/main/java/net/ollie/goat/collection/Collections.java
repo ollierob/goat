@@ -1,4 +1,4 @@
-package net.ollie.goat.collections;
+package net.ollie.goat.collection;
 
 import java.util.function.Predicate;
 
@@ -6,9 +6,9 @@ import java.util.function.Predicate;
  *
  * @author Ollie
  */
-public class Collections {
+public abstract class Collections {
 
-    Collections() {
+    protected Collections() {
     }
 
     public static <T> boolean any(final Iterable<T> iterable, final Predicate<? super T> predicate) {
