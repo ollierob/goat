@@ -62,7 +62,7 @@ public final class Lists extends Collections {
         return list.isEmpty() ? null : list.get(list.size() - 1);
     }
 
-    public static <T> List<T> lazy(final int size, final IntFunction<? extends T> func) {
+    public static <T> List<T> lazilyComputed(final int size, final IntFunction<? extends T> func) {
         return size == 0
                 ? java.util.Collections.emptyList()
                 : new LazyList<>(size, func);
