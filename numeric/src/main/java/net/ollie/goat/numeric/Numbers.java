@@ -3,6 +3,8 @@ package net.ollie.goat.numeric;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import javax.annotation.Nullable;
+
 import net.ollie.goat.functions.Functions;
 
 /**
@@ -17,18 +19,21 @@ public abstract class Numbers {
     protected Numbers() {
     }
 
-    public static boolean isNativeIntegral(final Number number) {
+    public static boolean isNativeIntegral(@Nullable final Number number) {
         return number instanceof Integer || number instanceof Long;
     }
 
-    public static boolean isOne(final Number number) {
+    public static boolean isOne(@Nullable final Number number) {
+        if (number == null) {
+            return false;
+        }
         if (isNativeIntegral(number)) {
             return number.intValue() == 1;
         }
         return BigDecimals.isOne(BigDecimals.toBigDecimal(number));
     }
 
-    public static boolean equals(final Number left, final Number right) {
+    public static boolean equals(@Nullable final Number left, @Nullable final Number right) {
         return left == null
                 ? right == null
                 : right != null && left.doubleValue() == right.doubleValue(); //FIXME
@@ -48,6 +53,13 @@ public abstract class Numbers {
                 return (int) Math.ceil(d);
             case FLOOR:
                 return (int) Math.floor(d);
+            case HALF_UP:
+                final int i = (int) d;
+                if (i >= 0) {
+                    return d >= i + 0.5 ? i + 1 : i;
+                } else {
+                    return d <= i - 0.5 ? i - 1 : i;
+                }
             default:
                 throw new UnsupportedOperationException(); //TODO
         }

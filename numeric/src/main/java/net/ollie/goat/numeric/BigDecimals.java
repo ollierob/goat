@@ -2,6 +2,9 @@ package net.ollie.goat.numeric;
 
 import java.math.BigDecimal;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  *
  * @author Ollie
@@ -11,6 +14,7 @@ public abstract class BigDecimals {
     protected BigDecimals() {
     }
 
+    @Nonnull
     public static BigDecimal toBigDecimal(final int i) {
         switch (i) {
             case 0:
@@ -24,7 +28,8 @@ public abstract class BigDecimals {
         }
     }
 
-    public static BigDecimal toBigDecimal(final Number number) {
+    @Nonnull
+    public static BigDecimal toBigDecimal(@Nonnull final Number number) {
         if (number instanceof Integer) {
             return toBigDecimal((int) number);
         }
@@ -33,8 +38,14 @@ public abstract class BigDecimals {
                 : new BigDecimal(number.toString());
     }
 
-    public static boolean isOne(final BigDecimal number) {
+    @Nonnull
+    public static boolean isOne(@Nonnull final BigDecimal number) {
         return number == BigDecimal.ONE || number.compareTo(BigDecimal.ONE) == 0;
+    }
+
+    public static boolean valuesEqual(@Nullable final BigDecimal b1, @Nullable final BigDecimal b2) {
+        return b1 == b2
+                || (b1 != null && b2 != null && b1.compareTo(b2) == 0);
     }
 
 }
