@@ -1,4 +1,4 @@
-package net.ollie.goat.money.interest.daycount;
+package net.ollie.goat.temporal.date.count;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

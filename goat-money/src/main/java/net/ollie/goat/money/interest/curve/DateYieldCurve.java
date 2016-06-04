@@ -24,12 +24,6 @@ public class DateYieldCurve implements YieldCurve<LocalDate> {
         return new DateYieldCurve(Collections.singletonMap(SOME_TIME, percentage));
     }
 
-    public static DateYieldCurve of(final LocalDate fixing, final YearsYieldCurve yieldCurve) {
-        final NavigableMap<LocalDate, Percentage> map = new TreeMap<>();
-        yieldCurve.toMap().forEach((tenor, rate) -> map.put(tenor.addTo(fixing), rate));
-        return new DateYieldCurve(map);
-    }
-
     @XmlElementWrapper
     private NavigableMap<LocalDate, Percentage> data;
 

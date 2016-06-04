@@ -1,11 +1,11 @@
-package net.ollie.goat.money.interest.daycount;
+package net.ollie.goat.temporal.date.count;
 
 import java.time.LocalDate;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.date.years.Years;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *

@@ -1,6 +1,5 @@
 package net.ollie.goat.money.interest.curve;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -12,9 +11,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.ollie.goat.collection.Maps;
 import net.ollie.goat.collection.Sets;
-import net.ollie.goat.date.years.Years;
 import net.ollie.goat.numeric.interpolation.Interpolator;
 import net.ollie.goat.numeric.percentage.Percentage;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
@@ -55,10 +54,6 @@ public class YearsYieldCurve
     @Override
     public Percentage get(final Years tenor, final Interpolator<Years, Percentage> interpolator) {
         return interpolator.interpolate(tenor, data);
-    }
-
-    public DateYieldCurve relativeTo(final LocalDate date) {
-        return DateYieldCurve.of(date, this);
     }
 
     @Override

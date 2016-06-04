@@ -1,4 +1,4 @@
-package net.ollie.goat.date;
+package net.ollie.goat.temporal.date;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -10,7 +10,7 @@ import net.ollie.goat.functions.Functions;
  *
  * @author Ollie
  */
-public class Dates {
+public abstract class Dates {
 
     public static double DAYS_PER_YEAR = 365.2425d;
 

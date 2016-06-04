@@ -1,9 +1,9 @@
-package net.ollie.goat.date.years;
+package net.ollie.goat.temporal.date.years;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.time.LocalDate;
+import java.time.Period;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -23,31 +23,26 @@ public class FractionalYears implements Years {
         return new FractionalYears(new Fraction(numerator, denominator));
     }
 
-    @XmlElement(name = "years")
-    private Fraction fraction;
+    @XmlElement(name = "years") //FIXME not marshalable
+    private Fraction years;
 
     @Deprecated
     FractionalYears() {
     }
 
     public FractionalYears(final Fraction years) {
-        this.fraction = years;
-    }
-
-    @Override
-    public LocalDate addTo(LocalDate date) {
-        throw new UnsupportedOperationException(); //TODO
+        this.years = years;
     }
 
     @Override
     public Years plus(final Years that) {
         return that instanceof FractionalYears
                 ? this.plus((FractionalYears) that)
-                : new DoubleYears(this.fraction.doubleValue() + that.doubleValue());
+                : new DoubleYears(this.years.doubleValue() + that.doubleValue());
     }
 
     public FractionalYears plus(final FractionalYears that) {
-        return new FractionalYears(this.fraction.add(that.fraction));
+        return new FractionalYears(this.years.add(that.years));
     }
 
     @Override
@@ -57,7 +52,15 @@ public class FractionalYears implements Years {
 
     @Override
     public BigDecimal decimalValue(final MathContext context) {
-        return BigDecimal.valueOf(fraction.doubleValue()).round(context);
+        return BigDecimal.valueOf(years.doubleValue()).round(context);
+    }
+
+    @Override
+    public Period toPeriod(final double daysPerYear) {
+        final double total = years.doubleValue();
+        final int wholeYears = (int) total;
+        final int wholeDays = (int) (daysPerYear * (total - wholeYears));
+        return Period.of(wholeYears, 0, wholeDays);
     }
 
 }

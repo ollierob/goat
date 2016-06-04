@@ -1,12 +1,12 @@
-package net.ollie.goat.money.interest.daycount;
+package net.ollie.goat.temporal.date.count;
 
 import java.time.LocalDate;
 import java.util.OptionalInt;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.date.Interim;
-import net.ollie.goat.date.Interval;
+import net.ollie.goat.temporal.date.Interim;
+import net.ollie.goat.temporal.date.Interval;
 
 /**
  *

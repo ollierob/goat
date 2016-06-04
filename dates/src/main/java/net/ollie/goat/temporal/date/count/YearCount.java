@@ -1,10 +1,10 @@
-package net.ollie.goat.money.interest.daycount;
+package net.ollie.goat.temporal.date.count;
 
 import java.time.LocalDate;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.date.years.Years;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *

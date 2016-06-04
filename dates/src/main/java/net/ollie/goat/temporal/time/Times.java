@@ -1,4 +1,4 @@
-package net.ollie.goat.time;
+package net.ollie.goat.temporal.time;
 
 import java.time.Instant;
 

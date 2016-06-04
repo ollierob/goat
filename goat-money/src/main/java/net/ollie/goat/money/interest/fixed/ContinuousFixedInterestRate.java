@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 
 import net.ollie.goat.money.currency.Currency;
-import net.ollie.goat.date.years.Years;
+import net.ollie.goat.temporal.date.years.Years;
 import net.ollie.goat.money.Money;
-import net.ollie.goat.money.interest.daycount.AccrualFactor;
+import net.ollie.goat.temporal.date.count.AccrualFactor;
 import net.ollie.goat.numeric.percentage.Percentage;
 
 /**

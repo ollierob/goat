@@ -1,4 +1,4 @@
-package net.ollie.goat.money.interest.daycount;
+package net.ollie.goat.temporal.date.count;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -6,8 +6,8 @@ import java.time.Month;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-import net.ollie.goat.date.years.FractionalYears;
-import net.ollie.goat.date.years.Years;
+import net.ollie.goat.temporal.date.years.FractionalYears;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *

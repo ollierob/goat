@@ -1,4 +1,4 @@
-package net.ollie.goat.date;
+package net.ollie.goat.temporal.date;
 
 import java.io.Externalizable;
 import java.io.IOException;

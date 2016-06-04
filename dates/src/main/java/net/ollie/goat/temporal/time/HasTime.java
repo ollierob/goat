@@ -1,6 +1,6 @@
-package net.ollie.goat.time;
+package net.ollie.goat.temporal.time;
 
-import net.ollie.goat.date.HasDate;
+import net.ollie.goat.temporal.date.HasDate;
 
 import java.time.Instant;
 import java.time.LocalDate;

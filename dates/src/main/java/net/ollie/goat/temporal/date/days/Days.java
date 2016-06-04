@@ -1,4 +1,4 @@
-package net.ollie.goat.date.days;
+package net.ollie.goat.temporal.date.days;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

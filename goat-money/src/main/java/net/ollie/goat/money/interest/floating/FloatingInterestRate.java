@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import net.ollie.goat.money.currency.Currency;
-import net.ollie.goat.date.Dates;
-import net.ollie.goat.date.years.Years;
+import net.ollie.goat.temporal.date.Dates;
+import net.ollie.goat.temporal.date.years.Years;
 import net.ollie.goat.money.Money;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.interest.InterestRate;
 import net.ollie.goat.numeric.percentage.Percentage;
 
