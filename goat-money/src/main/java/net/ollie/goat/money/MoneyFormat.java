@@ -1,7 +1,5 @@
 package net.ollie.goat.money;
 
-import net.ollie.goat.currency.Currency;
-
 /**
  *
  */
@@ -11,13 +9,7 @@ public enum MoneyFormat {
 
         @Override
         public String toString(final Money<?> money) {
-            return this.symbol(money.currency()) + " " + money.amount();
-        }
-
-        private String symbol(final Currency currency) {
-            return currency instanceof Currency
-                    ? ((Currency) currency).uniqueSymbol()
-                    : currency.toString();
+            return money.currency().uniqueSymbol() + " " + money.amount();
         }
 
     },

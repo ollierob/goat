@@ -18,6 +18,7 @@
         <module>dates</module>
         <module>numeric</module>
         <module>goat-money</module>
+        <module>goat-collections</module>
     </modules>
     
     <dependencies>

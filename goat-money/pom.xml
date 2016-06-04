@@ -19,5 +19,10 @@
             <artifactId>goat-dates</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>goat-collections</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
