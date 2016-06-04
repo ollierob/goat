@@ -13,8 +13,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import net.ollie.goat.currency.Currency;
-import net.ollie.goat.numeric.Numbers;
-import static net.ollie.goat.numeric.Numbers.toBigDecimal;
+import net.ollie.goat.numeric.BigDecimals;
 
 /**
  *
@@ -27,7 +26,7 @@ public class DecimalMoney<C extends Currency>
     private static final long serialVersionUID = 1L;
 
     public static <C extends Currency> DecimalMoney<C> valueOf(final C currency, final Number amount) {
-        return new DecimalMoney<>(currency, Numbers.toBigDecimal(amount));
+        return new DecimalMoney<>(currency, BigDecimals.toBigDecimal(amount));
     }
 
     public static <C extends Currency> DecimalMoney<C> valueOf(final C currency, final double amount) {
@@ -68,7 +67,7 @@ public class DecimalMoney<C extends Currency>
 
     @Override
     public DecimalMoney<C> times(final Number n) {
-        return new DecimalMoney<>(currency, amount.multiply(toBigDecimal(n)));
+        return new DecimalMoney<>(currency, amount.multiply(BigDecimals.toBigDecimal(n)));
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import net.ollie.goat.numeric.Numbers;
+import net.ollie.goat.numeric.BigDecimals;
 import net.ollie.goat.numeric.Numeric;
 
 /**
@@ -33,7 +33,7 @@ public class DecimalFraction
         if (denominator instanceof DecimalFraction) {
             return ((DecimalFraction) denominator).inverse().times(numerator);
         }
-        return of(Numbers.toBigDecimal(numerator), Numbers.toBigDecimal(denominator));
+        return of(BigDecimals.toBigDecimal(numerator), BigDecimals.toBigDecimal(denominator));
     }
 
     public static DecimalFraction of(final BigDecimal numerator, final BigDecimal denominator) {
@@ -101,7 +101,7 @@ public class DecimalFraction
     public DecimalFraction times(final Number number) {
         return number instanceof DecimalFraction
                 ? this.times((DecimalFraction) number)
-                : this.times(Numbers.toBigDecimal(number));
+                : this.times(BigDecimals.toBigDecimal(number));
     }
 
     public DecimalFraction times(final BigDecimal decimal) {
@@ -115,7 +115,7 @@ public class DecimalFraction
     public DecimalFraction over(final Number number) {
         return number instanceof DecimalFraction
                 ? this.over((DecimalFraction) number)
-                : this.over(Numbers.toBigDecimal(number));
+                : this.over(BigDecimals.toBigDecimal(number));
     }
 
     public DecimalFraction over(final BigDecimal decimal) {

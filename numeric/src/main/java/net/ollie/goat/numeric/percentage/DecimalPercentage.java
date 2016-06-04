@@ -12,6 +12,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
+import net.ollie.goat.numeric.BigDecimals;
 import net.ollie.goat.numeric.Numbers;
 import net.ollie.goat.numeric.Numeric;
 
@@ -70,8 +71,9 @@ public class DecimalPercentage
         return this.times(that);
     }
 
+    @Override
     public Percentage times(final Number that) {
-        return new DecimalPercentage(value.multiply(Numbers.toBigDecimal(that)));
+        return new DecimalPercentage(value.multiply(BigDecimals.toBigDecimal(that)));
     }
 
     public Percentage timesBy(final Numeric<?> that) {

@@ -6,10 +6,11 @@ import java.math.RoundingMode;
 import net.ollie.goat.functions.Functions;
 
 /**
+ * Extension methods for numbers.
  *
  * @author Ollie
  */
-public class Numbers {
+public abstract class Numbers {
 
     public static final BigDecimal ONE_HUNDRED = BigDecimal.ONE.movePointRight(2);
 
@@ -20,33 +21,11 @@ public class Numbers {
         return number instanceof Integer || number instanceof Long;
     }
 
-    public static BigDecimal toBigDecimal(final Number number) {
-        if (isNativeIntegral(number)) {
-            switch (number.intValue()) {
-                case 0:
-                    return BigDecimal.ZERO;
-                case 1:
-                    return BigDecimal.ONE;
-                case 10:
-                    return BigDecimal.TEN;
-                default:
-                    return BigDecimal.valueOf(number.longValue());
-            }
-        }
-        return number instanceof BigDecimal
-                ? (BigDecimal) number
-                : new BigDecimal(number.toString());
-    }
-
     public static boolean isOne(final Number number) {
         if (isNativeIntegral(number)) {
             return number.intValue() == 1;
         }
-        return isOne(toBigDecimal(number));
-    }
-
-    public static boolean isOne(final BigDecimal number) {
-        return number == BigDecimal.ONE || number.compareTo(BigDecimal.ONE) == 0;
+        return BigDecimals.isOne(BigDecimals.toBigDecimal(number));
     }
 
     public static boolean equals(final Number left, final Number right) {
@@ -79,7 +58,7 @@ public class Numbers {
         if (n1 instanceof Comparable && n1.getClass().isAssignableFrom(n2.getClass())) {
             return ((Comparable) n1).compareTo(n2);
         }
-        return Double.compare(n1.doubleValue(), n2.doubleValue());
+        return BigDecimals.toBigDecimal(n1).compareTo(BigDecimals.toBigDecimal(n2));
     }
 
 }

@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 
 import javax.annotation.Nonnull;
 
-import static net.ollie.goat.numeric.Numbers.toBigDecimal;
+import static net.ollie.goat.numeric.BigDecimals.toBigDecimal;
 
 /**
  *
