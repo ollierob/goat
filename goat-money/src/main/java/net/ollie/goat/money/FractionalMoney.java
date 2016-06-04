@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 
-import net.ollie.goat.currency.Currency;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**

@@ -6,8 +6,8 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.currency.Currency;
-import net.ollie.goat.currency.HasCurrency;
+import net.ollie.goat.money.currency.Currency;
+import net.ollie.goat.money.currency.HasCurrency;
 import net.ollie.goat.numeric.Numbers;
 import net.ollie.goat.numeric.Numeric;
 import net.ollie.goat.numeric.fraction.DecimalFraction;

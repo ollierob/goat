@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import net.ollie.goat.currency.Currency;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.date.Dates;
 import net.ollie.goat.date.years.Years;
 import net.ollie.goat.money.Money;

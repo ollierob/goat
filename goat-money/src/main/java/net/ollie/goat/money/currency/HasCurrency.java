@@ -1,4 +1,4 @@
-package net.ollie.goat.currency;
+package net.ollie.goat.money.currency;
 
 import java.util.Collections;
 import java.util.Set;

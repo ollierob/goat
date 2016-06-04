@@ -8,7 +8,7 @@ import java.io.ObjectOutput;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.currency.Currency;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**

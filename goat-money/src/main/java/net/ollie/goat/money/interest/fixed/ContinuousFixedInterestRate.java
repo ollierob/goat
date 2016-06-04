@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 
-import net.ollie.goat.currency.Currency;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.date.years.Years;
 import net.ollie.goat.money.Money;
 import net.ollie.goat.money.interest.daycount.AccrualFactor;
