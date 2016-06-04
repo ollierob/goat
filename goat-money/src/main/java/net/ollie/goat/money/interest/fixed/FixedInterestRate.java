@@ -24,7 +24,13 @@ public abstract class FixedInterestRate implements InterestRate, Comparable<Fixe
 
     @Override
     @Deprecated
-    public Percentage fixing(final LocalDate date) {
+    public Percentage spot(final LocalDate date) {
+        return this.annualRate();
+    }
+
+    @Override
+    @Deprecated
+    public Percentage forward(final LocalDate fixing, final LocalDate out) {
         return this.annualRate();
     }
 

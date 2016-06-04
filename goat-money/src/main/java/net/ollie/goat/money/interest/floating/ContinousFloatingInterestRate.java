@@ -55,7 +55,7 @@ public class ContinousFloatingInterestRate extends FloatingInterestRate {
     }
 
     @Override
-    public Percentage fixing(final LocalDate date) {
+    public Percentage spot(final LocalDate date) {
         final Years years = accrual.yearsBetween(spot, date);
         return curve.get(years, interpolator);
     }

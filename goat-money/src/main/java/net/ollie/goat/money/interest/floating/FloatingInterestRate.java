@@ -5,12 +5,12 @@ import java.time.LocalDate;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import net.ollie.goat.temporal.date.Dates;
-import net.ollie.goat.temporal.date.years.Years;
 import net.ollie.goat.money.Money;
 import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.interest.InterestRate;
 import net.ollie.goat.numeric.percentage.Percentage;
+import net.ollie.goat.temporal.date.Dates;
+import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
@@ -21,14 +21,15 @@ public abstract class FloatingInterestRate implements InterestRate {
 
     @Override
     public <C extends Currency> Money<C> accrue(final Money<C> money, final LocalDate start, final LocalDate end) {
-        final Percentage impliedForwardRate = this.impliedForwardRate(start, end);
+        final Percentage impliedForwardRate = this.forward(start, end);
         return this.accrue(money, impliedForwardRate, start, end);
     }
 
-    public Percentage impliedForwardRate(final LocalDate start, final LocalDate end) {
+    @Override
+    public Percentage forward(final LocalDate start, final LocalDate end) {
         final LocalDate spot = this.spot();
         if (Dates.equals(spot, start)) {
-            return this.fixing(end);
+            return this.spot(end);
         }
         final Years d1 = this.term(spot, start);
         final Percentage r1 = this.rateOver(d1);
@@ -49,7 +50,7 @@ public abstract class FloatingInterestRate implements InterestRate {
     }
 
     @Override
-    public Percentage fixing(final LocalDate date) {
+    public Percentage spot(final LocalDate date) {
         return this.rateOver(this.term(this.spot(), date));
     }
 

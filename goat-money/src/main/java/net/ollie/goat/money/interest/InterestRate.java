@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.Money;
-import net.ollie.goat.temporal.date.count.AccrualFactor;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.numeric.percentage.Percentage;
+import net.ollie.goat.temporal.date.count.AccrualFactor;
 
 /**
  *
@@ -20,10 +20,13 @@ public interface InterestRate {
     AccrualFactor accrual();
 
     @Nonnull
-    Percentage fixing(LocalDate date);
+    Percentage spot(LocalDate fixing);
 
     @Nonnull
-    <C extends Currency> Money<C> accrue(Money<C> money, LocalDate start, LocalDate accrualDate);
+    Percentage forward(LocalDate fixing, LocalDate out);
+
+    @Nonnull
+    <C extends Currency> Money<C> accrue(Money<C> money, LocalDate from, LocalDate until);
 
     @Nonnull
     default <C extends Currency> Money<C> accrued(final Money<C> money, final LocalDate earlier, final LocalDate later) {
