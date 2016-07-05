@@ -9,6 +9,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import net.ollie.goat.numeric.BigDecimals;
 import net.ollie.goat.numeric.Numeric;
@@ -17,6 +18,7 @@ import net.ollie.goat.numeric.Numeric;
  *
  * @author Ollie
  */
+@XmlRootElement
 public class DecimalFraction
         extends Number
         implements Numeric.Summable<DecimalFraction>, Externalizable {
@@ -74,6 +76,11 @@ public class DecimalFraction
     @Override
     public boolean isZero() {
         return numerator.signum() == 0;
+    }
+
+    public boolean isNegative() {
+        return !this.isZero()
+                && numerator.signum() != denominator.signum();
     }
 
     public DecimalFraction plus(final BigDecimal bd) {

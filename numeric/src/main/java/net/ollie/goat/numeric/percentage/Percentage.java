@@ -21,4 +21,8 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
         return DecimalPercentage.basisPoints(1);
     }
 
+    public static Percentage zero() {
+        return DecimalPercentage.ZERO_PERCENT;
+    }
+
 }
