@@ -5,8 +5,8 @@ import java.util.OptionalInt;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.temporal.date.Interim;
-import net.ollie.goat.temporal.date.Interval;
+import net.ollie.goat.temporal.date.interim.Interim;
+import net.ollie.goat.temporal.date.interim.CompleteInterval;
 
 /**
  *
@@ -16,7 +16,7 @@ public interface DayCount {
 
     int daysBetween(@Nonnull LocalDate startInclusive, @Nonnull LocalDate endExclusive);
 
-    default int daysIn(@Nonnull final Interval interim) {
+    default int daysIn(@Nonnull final CompleteInterval interim) {
         return this.daysBetween(interim.startInclusive(), interim.endExclusive());
     }
 

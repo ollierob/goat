@@ -1,26 +1,24 @@
-package net.ollie.goat.temporal.date;
+package net.ollie.goat.temporal.date.interim;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.AbstractList;
-import java.util.Optional;
+import java.util.SortedSet;
+import java.util.Spliterator;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author ollie
  */
-@XmlRootElement
-public class Interval
+public abstract class Interval
         extends AbstractList<LocalDate>
-        implements Interim, Externalizable {
+        implements Interim, SortedSet<LocalDate>, Externalizable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,23 +29,12 @@ public class Interval
     private LocalDate endInclusive;
 
     @Deprecated
-    Interval() {
+    protected Interval() {
     }
 
-    public Interval(final LocalDate startInclusive, final LocalDate endInclusive) {
+    protected Interval(LocalDate startInclusive, LocalDate endInclusive) {
         this.startInclusive = startInclusive;
         this.endInclusive = endInclusive;
-    }
-
-    @Override
-    public boolean contains(final LocalDate date) {
-        return !date.isBefore(startInclusive)
-                && !date.isAfter(endInclusive);
-    }
-
-    @Override
-    public Optional<Interval> closed() {
-        return Optional.of(this);
     }
 
     @Nonnull
@@ -56,23 +43,18 @@ public class Interval
     }
 
     @Nonnull
-    public LocalDate endExclusive() {
-        return endInclusive.plusDays(1);
-    }
-
-    @Nonnull
     public LocalDate endInclusive() {
         return endInclusive;
     }
 
-    @Override
-    public LocalDate get(final int index) {
-        return startInclusive.plusDays(index);
+    @Nonnull
+    public LocalDate endExclusive() {
+        return endInclusive.plusDays(1);
     }
 
     @Override
-    public int size() {
-        return Math.toIntExact(ChronoUnit.DAYS.between(startInclusive, endInclusive)) + 1;
+    public Spliterator<LocalDate> spliterator() {
+        return super.spliterator();
     }
 
     @Override

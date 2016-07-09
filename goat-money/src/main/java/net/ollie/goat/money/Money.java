@@ -54,6 +54,12 @@ public interface Money<C extends Currency>
         return new DecimalMoney<>(currency, BigDecimal.ZERO);
     }
 
+    static <C extends Currency> DecimalMoney<C> of(final long amount, final C currency) {
+        return amount == 0
+                ? zero(currency)
+                : new DecimalMoney<>(currency, BigDecimal.valueOf(amount));
+    }
+
     static boolean valuesEqual(final Money<?> left, final Money<?> right) {
         return Objects.equals(left.currency(), right.currency())
                 && Numbers.equals(left.amount(), right.amount());
