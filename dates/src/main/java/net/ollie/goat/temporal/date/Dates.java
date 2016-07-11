@@ -35,6 +35,14 @@ public abstract class Dates {
         return areOrdered(d1, d2) && areOrdered(d2, d3);
     }
 
+    public static LocalDate min(final LocalDate d1, final LocalDate d2) {
+        return d2.isAfter(d1) ? d1 : d2;
+    }
+
+    public static LocalDate max(final LocalDate d1, final LocalDate d2) {
+        return d2.isAfter(d1) ? d2 : d1;
+    }
+
     public static Iterable<LocalDate> over(final LocalDate start, final LocalDate endExclusive) {
         return () -> new Iterator<LocalDate>() {
 

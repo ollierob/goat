@@ -75,8 +75,8 @@ public abstract class FixedInterestRate implements InterestRate, Comparable<Fixe
     public abstract FixedInterestRate with(Percentage rate);
 
     @Override
-    public <C extends Currency> Money<C> accrue(Money<C> money, LocalDate from, LocalDate until) {
-        return this.accrue(money, this.dateArithmetic().yearsBetween(from, until));
+    public <C extends Currency> Money<C> accrue(final Money<C> money, final LocalDate since, final LocalDate until) {
+        return this.accrue(money, this.dateArithmetic().yearsBetween(since, until));
     }
 
     public abstract <C extends Currency> Money<C> accrue(Money<C> money, Years yearsBetween);
