@@ -9,6 +9,7 @@ import net.ollie.goat.money.Money;
 import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.numeric.percentage.Percentage;
 import net.ollie.goat.temporal.date.count.DateArithmetic;
+import net.ollie.goat.temporal.date.interim.CompleteInterval;
 
 /**
  *
@@ -20,7 +21,8 @@ public interface InterestRate {
     DateArithmetic dateArithmetic();
 
     /**
-     * @return the interest rate given for a period from now until the given date.
+     * @return the interest rate given for a period from now until the given
+     * date.
      */
     @Nonnull
     Percentage spot(LocalDate end);
@@ -33,6 +35,11 @@ public interface InterestRate {
 
     @Nonnull
     <C extends Currency> Money<C> accrue(Money<C> money, LocalDate from, LocalDate until);
+
+    @Nonnull
+    default <C extends Currency> Money<C> accrue(final Money<C> money, final CompleteInterval interval) {
+        return this.accrue(money, interval.first(), interval.last());
+    }
 
     @Nonnull
     default <C extends Currency> Money<C> accrued(final Money<C> money, final LocalDate earlier, final LocalDate later) {
