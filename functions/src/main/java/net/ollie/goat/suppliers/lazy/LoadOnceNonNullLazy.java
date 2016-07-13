@@ -6,12 +6,12 @@ import net.ollie.goat.suppliers.NonNullSupplier;
  *
  * @author Ollie
  */
-public class LoadOneNonnullLazy<T> implements Lazy<T> {
+public class LoadOnceNonNullLazy<T> implements Lazy<T> {
 
     private final NonNullSupplier<? extends T> supplier;
     private T value;
 
-    public LoadOneNonnullLazy(final NonNullSupplier<? extends T> supplier) {
+    public LoadOnceNonNullLazy(final NonNullSupplier<? extends T> supplier) {
         this.supplier = supplier;
     }
 

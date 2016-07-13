@@ -36,7 +36,9 @@ public final class OptionalCollectors {
             return defaultValue.get();
         }
         final T first = iterator.next();
-        return iterator.hasNext() ? Exceptions.throwIllegalArgumentException("More than one element inside [" + iterable + "]!") : first;
+        return iterator.hasNext()
+                ? Exceptions.throwIllegalArgumentException("More than one element inside [" + iterable + "]!")
+                : first;
     }
 
 }
