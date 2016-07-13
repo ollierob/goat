@@ -20,6 +20,7 @@ public class DecimalFractionTest {
     @Test
     public void testEquality() {
         assertThat(DecimalFraction.of(2, 4), is(DecimalFraction.of(1, 2)));
+        assertThat(DecimalFraction.of(2, 6), is(DecimalFraction.of(1, 3)));
     }
 
     @Test
@@ -34,6 +35,25 @@ public class DecimalFractionTest {
         assertThat(d1.compareTo(d1), is(0));
         assertTrue(d1.compareTo(d2) > 0);
         assertTrue(d2.compareTo(d1) < 0);
+    }
+
+    @Test
+    public void testAdd() {
+        assertThat(DecimalFraction.of(1, 2).plus(DecimalFraction.of(2, 3)), is(DecimalFraction.of(7, 6)));
+    }
+
+    @Test
+    public void testIsReduced() {
+        assertTrue("1/2", DecimalFraction.of(1, 2).isReduced());
+        assertFalse("2/4", DecimalFraction.of(2, 4).isReduced());
+        assertTrue("1/3", DecimalFraction.of(1, 3).isReduced());
+        assertFalse("2/6", DecimalFraction.of(2, 6).isReduced());
+        assertTrue("-1/3", DecimalFraction.of(-1, 3).isReduced());
+        assertTrue("-1/3", DecimalFraction.of(1, -3).isReduced());
+        assertFalse("-2/3", DecimalFraction.of(-2, 6).isReduced());
+        assertFalse("-2/3", DecimalFraction.of(2, -6).isReduced());
+        assertFalse("4/8", DecimalFraction.of(4, 8).isReduced());
+        assertTrue("3/7", DecimalFraction.of(3, 7).isReduced());
     }
 
 }

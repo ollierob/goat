@@ -5,14 +5,19 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import net.ollie.goat.numeric.BigDecimals;
 import net.ollie.goat.numeric.Numeric;
+import net.ollie.goat.numeric.percentage.FractionalPercentage;
+import net.ollie.goat.numeric.percentage.Percentage;
 
 /**
  *
@@ -27,6 +32,10 @@ public class DecimalFraction
 
     public static final DecimalFraction MINUS_ONE = DecimalFraction.of(-1, 1);
     public static final DecimalFraction ZERO = new DecimalFraction(BigDecimal.ZERO, BigDecimal.ONE);
+
+    public static DecimalFraction of(final long numerator, final long denominator) {
+        return of(BigDecimal.valueOf(numerator), BigDecimal.valueOf(denominator));
+    }
 
     public static DecimalFraction of(final Number numerator, final Number denominator) {
         if (numerator instanceof DecimalFraction) {
@@ -83,7 +92,14 @@ public class DecimalFraction
                 && numerator.signum() != denominator.signum();
     }
 
-    public DecimalFraction plus(final BigDecimal bd) {
+    public DecimalFraction plus(@Nonnull final Number number) {
+        return number instanceof DecimalFraction
+                ? this.plus((DecimalFraction) number)
+                : this.plus(BigDecimals.toBigDecimal(number));
+    }
+
+    @CheckReturnValue
+    public DecimalFraction plus(@Nonnull final BigDecimal bd) {
         return of(numerator.add(bd.multiply(denominator)), denominator);
     }
 
@@ -91,6 +107,13 @@ public class DecimalFraction
     public DecimalFraction plus(final DecimalFraction that) {
         return of(
                 this.numerator.multiply(that.denominator).add(that.numerator.multiply(this.denominator)),
+                this.denominator.multiply(that.denominator));
+    }
+
+    @Override
+    public DecimalFraction minus(final DecimalFraction that) {
+        return of(
+                this.numerator.multiply(that.denominator).subtract(that.numerator.multiply(this.denominator)),
                 this.denominator.multiply(that.denominator));
     }
 
@@ -134,6 +157,12 @@ public class DecimalFraction
         return this.times(that.inverse());
     }
 
+    public DecimalFraction abs() {
+        return this.isNegative()
+                ? of(numerator.abs(), denominator.abs())
+                : this;
+    }
+
     public DecimalFraction inverse() {
         return of(denominator, numerator);
     }
@@ -161,6 +190,17 @@ public class DecimalFraction
     @Override
     public double doubleValue() {
         return this.decimalValue(MathContext.DECIMAL64).doubleValue();
+    }
+
+    public boolean isReduced() {
+        final BigInteger n = numerator.unscaledValue();
+        final BigInteger d = denominator.unscaledValue();
+        final BigInteger gcd = n.gcd(d);
+        return gcd.compareTo(BigInteger.ONE) == 0;
+    }
+
+    public Percentage toPercentage() {
+        return new FractionalPercentage(this);
     }
 
     @Override
@@ -192,13 +232,13 @@ public class DecimalFraction
     }
 
     @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
+    public void writeExternal(final ObjectOutput out) throws IOException {
         out.writeObject(numerator);
         out.writeObject(denominator);
     }
 
     @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
         numerator = (BigDecimal) in.readObject();
         denominator = (BigDecimal) in.readObject();
     }
