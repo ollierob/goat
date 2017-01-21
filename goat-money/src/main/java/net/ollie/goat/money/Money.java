@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 
 import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.currency.HasCurrency;
+import net.ollie.goat.money.fx.ExchangeRate;
 import net.ollie.goat.numeric.Numbers;
 import net.ollie.goat.numeric.Numeric;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
@@ -30,6 +31,10 @@ public interface Money<C extends Currency>
 
     @Override
     Money<C> plus(@Nonnull Money<C> that);
+
+    default <T extends Currency> Money<T> convert(final ExchangeRate<C, T> rate) {
+        return rate.convert(this);
+    }
 
     @Override
     default Money<C> minus(final Money<C> that) {
