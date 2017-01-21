@@ -93,7 +93,7 @@ public class DecimalMoney<C extends Currency>
 
     @Override
     public String toString() {
-        return this.toString(MoneyFormat.SYMBOL_AMOUNT);
+        return this.toString(currency.format());
     }
 
     @Override

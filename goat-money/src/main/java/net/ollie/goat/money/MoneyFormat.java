@@ -1,35 +1,18 @@
 package net.ollie.goat.money;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  */
-public enum MoneyFormat {
+public interface MoneyFormat {
 
-    SYMBOL_AMOUNT {
+    @Nonnull
+    String toString(@Nonnull Money<?> money);
 
-        @Override
-        public String toString(final Money<?> money) {
-            return money.currency().uniqueSymbol() + " " + money.amount();
-        }
-
-    },
-    CURRENCY_AMOUNT {
-
-        @Override
-        public String toString(final Money<?> money) {
-            return money.currency() + " " + money.amount();
-        }
-
-    },
-    AMOUNT_CURRENCY {
-
-        @Override
-        public String toString(final Money<?> money) {
-            return money.amount() + " " + money.currency();
-        }
-
-    };
-
-    public abstract String toString(Money<?> money);
+    MoneyFormat SYMBOL_AMOUNT = money -> money.currency().uniqueSymbol() + " " + money.amount();
+    MoneyFormat AMOUNT_SYMBOL = money -> money.amount() + " " + money.currency().uniqueSymbol();
+    MoneyFormat CURRENCY_AMOUNT = money -> money.currency() + " " + money.amount();
+    MoneyFormat AMOUNT_CURRENCY = money -> money.amount() + " " + money.currency();
 
 }

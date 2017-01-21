@@ -2,6 +2,8 @@ package net.ollie.goat.money.currency;
 
 import javax.annotation.Nonnull;
 
+import net.ollie.goat.money.MoneyFormat;
+
 /**
  * A monetary unit.
  *
@@ -25,6 +27,11 @@ public interface Currency extends HasCurrency {
     @Deprecated
     default Currency currency() {
         return this;
+    }
+
+    @Nonnull
+    default MoneyFormat format() {
+        return MoneyFormat.SYMBOL_AMOUNT;
     }
 
 }
