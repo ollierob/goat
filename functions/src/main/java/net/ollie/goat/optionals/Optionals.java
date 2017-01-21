@@ -3,6 +3,7 @@ package net.ollie.goat.optionals;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 
 /**
  *
@@ -31,6 +32,12 @@ public final class Optionals {
         return left.isPresent() && right.isPresent()
                 ? predicate.test(left.get(), right.get())
                 : true;
+    }
+
+    public static <T> Optional<T> firstPresent(final Optional<T> optional, final Supplier<Optional<T>> supplier) {
+        return optional.isPresent()
+                ? optional
+                : supplier.get();
     }
 
 }
