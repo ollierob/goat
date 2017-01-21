@@ -6,15 +6,17 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.money.Money;
+import net.ollie.goat.money.currency.Currency;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
  *
  * @author Ollie
  */
+@XmlRootElement
 public class RatioExchangeRate<F extends Currency, T extends Currency>
         implements ExchangeRate<F, T>, Externalizable {
 

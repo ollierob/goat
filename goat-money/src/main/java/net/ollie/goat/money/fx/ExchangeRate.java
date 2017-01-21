@@ -5,10 +5,10 @@ import java.util.Set;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.goat.money.currency.Currency;
-import net.ollie.goat.money.currency.HasCurrencies;
 import net.ollie.goat.money.FractionalMoney;
 import net.ollie.goat.money.Money;
+import net.ollie.goat.money.currency.Currency;
+import net.ollie.goat.money.currency.HasCurrencies;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
@@ -37,6 +37,10 @@ public interface ExchangeRate<F extends Currency, T extends Currency>
 
     default ExchangeRate<T, F> inverse() {
         return new InverseExchangeRate<>(this);
+    }
+
+    default <X extends Currency> ExchangeRate<F, X> triangulate(final ExchangeRate<T, X> that) {
+        return new TriangulatedExchangeRate<>(this, that);
     }
 
     @Override
