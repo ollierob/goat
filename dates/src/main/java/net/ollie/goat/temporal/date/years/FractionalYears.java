@@ -7,6 +7,8 @@ import java.time.Period;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import net.ollie.goat.numeric.Numbers;
+
 import org.apache.commons.math3.fraction.Fraction;
 
 /**
@@ -46,8 +48,9 @@ public class FractionalYears implements Years {
     }
 
     @Override
-    public Years times(Number that, RoundingMode rounding) {
-        throw new UnsupportedOperationException(); //TODO
+    public Years times(final Number that, final RoundingMode rounding) {
+        final double years = this.years.doubleValue() * that.doubleValue();
+        return Years.of(Numbers.round(years, rounding));
     }
 
     @Override
