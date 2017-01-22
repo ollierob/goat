@@ -1,6 +1,7 @@
 package net.ollie.goat.numeric;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 import javax.annotation.Nullable;
@@ -44,25 +45,7 @@ public abstract class Numbers {
     }
 
     public static int round(final double d, final RoundingMode rounding) {
-        switch (rounding) {
-            case UP:
-                return (int) (d > 0 ? Math.ceil(d) : Math.floor(d));
-            case DOWN:
-                return (int) d;
-            case CEILING:
-                return (int) Math.ceil(d);
-            case FLOOR:
-                return (int) Math.floor(d);
-            case HALF_UP:
-                final int i = (int) d;
-                if (i >= 0) {
-                    return d >= i + 0.5 ? i + 1 : i;
-                } else {
-                    return d <= i - 0.5 ? i - 1 : i;
-                }
-            default:
-                throw new UnsupportedOperationException(); //TODO
-        }
+        return BigDecimal.valueOf(d).setScale(0, rounding).intValue();
     }
 
     @SuppressWarnings("unchecked")

@@ -28,6 +28,21 @@ public class NumbersTest {
         assertThat(Numbers.round(-1.1d, RoundingMode.HALF_UP), is(-1));
         assertThat(Numbers.round(-1.6d, RoundingMode.HALF_UP), is(-2));
         assertThat(Numbers.round(-2.5d, RoundingMode.HALF_UP), is(-3));
+        assertThat(Numbers.round(-5.5d, RoundingMode.HALF_UP), is(-6));
+    }
+
+    @Test
+    public void testRounding_HalfEven() {
+        assertThat(Numbers.round(5.5d, RoundingMode.HALF_EVEN), is(6));
+        assertThat(Numbers.round(2.5d, RoundingMode.HALF_EVEN), is(2));
+        assertThat(Numbers.round(1.6d, RoundingMode.HALF_EVEN), is(2));
+        assertThat(Numbers.round(1.1d, RoundingMode.HALF_EVEN), is(1));
+        assertThat(Numbers.round(1d, RoundingMode.HALF_EVEN), is(1));
+        assertThat(Numbers.round(-1d, RoundingMode.HALF_EVEN), is(-1));
+        assertThat(Numbers.round(-1.1d, RoundingMode.HALF_EVEN), is(-1));
+        assertThat(Numbers.round(-1.6d, RoundingMode.HALF_EVEN), is(-2));
+        assertThat(Numbers.round(-2.5d, RoundingMode.HALF_EVEN), is(-2));
+        assertThat(Numbers.round(-5.5d, RoundingMode.HALF_EVEN), is(-6));
     }
 
 }
