@@ -29,7 +29,7 @@ public interface Numeric<T extends Numeric<T>>
 
     @Nonnull
     default T times(@Nonnull final Number that) {
-        return this.times(that, RoundingMode.HALF_EVEN);
+        return this.times(that, RoundingMode.HALF_UP);
     }
 
     @Nonnull
