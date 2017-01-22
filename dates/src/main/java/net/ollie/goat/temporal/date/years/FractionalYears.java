@@ -48,9 +48,29 @@ public class FractionalYears implements Years {
     }
 
     @Override
+    public Years times(final Number that) {
+        return that instanceof Fraction
+                ? this.times((Fraction) that)
+                : Years.super.times(that);
+    }
+
+    @Override
     public Years times(final Number that, final RoundingMode rounding) {
-        final double years = this.years.doubleValue() * that.doubleValue();
-        return Years.of(Numbers.round(years, rounding));
+        if (that instanceof Fraction) {
+            return this.times((Fraction) that);
+        }
+        if (that instanceof Integer) {
+            return this.times((int) that);
+        }
+        return new DoubleYears(this.years.doubleValue() * that.doubleValue());
+    }
+
+    public FractionalYears times(final int numerator) {
+        return new FractionalYears(years.multiply(numerator));
+    }
+
+    public FractionalYears times(final Fraction that) {
+        return new FractionalYears(years.multiply(that));
     }
 
     @Override
