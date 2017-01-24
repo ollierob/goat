@@ -16,6 +16,7 @@ import net.ollie.goat.functions.Functions;
 public abstract class Numbers {
 
     public static final BigDecimal ONE_HUNDRED = BigDecimal.ONE.movePointRight(2);
+    private static final double DELTA = 1e-16;
 
     protected Numbers() {
     }
@@ -37,7 +38,7 @@ public abstract class Numbers {
     public static boolean equals(@Nullable final Number left, @Nullable final Number right) {
         return left == null
                 ? right == null
-                : right != null && left.doubleValue() == right.doubleValue(); //FIXME
+                : right != null && Math.abs(left.doubleValue() - right.doubleValue()) < DELTA; //FIXME
     }
 
     public static Integer add(final Integer left, final Integer right) {
@@ -45,7 +46,14 @@ public abstract class Numbers {
     }
 
     public static int round(final double d, final RoundingMode rounding) {
-        return BigDecimal.valueOf(d).setScale(0, rounding).intValue();
+        switch (rounding) {
+            case CEILING:
+                return (int) Math.ceil(d);
+            case FLOOR:
+                return (int) Math.floor(d);
+            default:
+                return BigDecimal.valueOf(d).setScale(0, rounding).intValue();
+        }
     }
 
     @SuppressWarnings("unchecked")
