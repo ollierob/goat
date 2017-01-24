@@ -13,7 +13,7 @@ import net.ollie.goat.temporal.date.years.Years;
  * @author Ollie
  */
 @XmlEnum
-public enum ActualFixedAccrualFactor implements DateArithmetic, ActualDayCount {
+public enum ActualFixedDateArithmetic implements DateArithmetic, ActualDayCount {
 
     @XmlEnumValue("ACT_360")
     ACT_360(360),
@@ -24,7 +24,7 @@ public enum ActualFixedAccrualFactor implements DateArithmetic, ActualDayCount {
 
     private final int daysPerYear;
 
-    private ActualFixedAccrualFactor(int daysPerYear) {
+    private ActualFixedDateArithmetic(int daysPerYear) {
         this.daysPerYear = daysPerYear;
     }
 

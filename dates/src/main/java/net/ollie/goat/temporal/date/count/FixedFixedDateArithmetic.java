@@ -14,10 +14,10 @@ import net.ollie.goat.temporal.date.years.Years;
  * @author ollie
  */
 @XmlEnum
-public enum FixedFixedAccrualFactor implements DateArithmetic {
+public enum FixedFixedDateArithmetic implements DateArithmetic {
 
     @XmlEnumValue("30_360")
-    THIRTY_THREESIXTY(30, 360) {
+    THIRTY_360(30, 360) {
 
         @Override
         public int daysBetween(final LocalDate startInclusive, final LocalDate endExclusive) {
@@ -70,7 +70,7 @@ public enum FixedFixedAccrualFactor implements DateArithmetic {
     private final int daysPerMonth;
     private final int daysPerYear;
 
-    private FixedFixedAccrualFactor(final int daysPerMonth, final int daysPerYear) {
+    private FixedFixedDateArithmetic(final int daysPerMonth, final int daysPerYear) {
         this.daysPerMonth = daysPerMonth;
         this.daysPerYear = daysPerYear;
     }

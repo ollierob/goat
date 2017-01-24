@@ -12,7 +12,7 @@ import net.ollie.goat.temporal.date.years.Years;
  * @author ollie
  */
 @XmlRootElement
-public class MixedAccrualFactor implements DateArithmetic {
+public class MixedDateArithmetic implements DateArithmetic {
 
     @XmlElementRef(name = "day_count")
     private DayCount dayCount;
@@ -21,10 +21,10 @@ public class MixedAccrualFactor implements DateArithmetic {
     private YearCount yearCount;
 
     @Deprecated
-    MixedAccrualFactor() {
+    MixedDateArithmetic() {
     }
 
-    public MixedAccrualFactor(DayCount dayCount, YearCount yearCount) {
+    public MixedDateArithmetic(final DayCount dayCount, final YearCount yearCount) {
         this.dayCount = dayCount;
         this.yearCount = yearCount;
     }
