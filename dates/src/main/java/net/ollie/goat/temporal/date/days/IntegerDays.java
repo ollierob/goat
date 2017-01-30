@@ -18,18 +18,18 @@ public class IntegerDays implements Days {
 
     private static final long serialVersionUID = 1L;
 
-    private static final IntegerDays ZERO = new IntegerDays(0);
-    private static final IntegerDays ONE = new IntegerDays(1);
+    private static final IntegerDays[] zeroToTen = new IntegerDays[11];
+
+    static {
+        for (int i = 0; i < zeroToTen.length; i++) {
+            zeroToTen[i] = new IntegerDays(i);
+        }
+    }
 
     public static IntegerDays of(final int days) {
-        switch (days) {
-            case 0:
-                return ZERO;
-            case 1:
-                return ONE;
-            default:
-                return new IntegerDays(days);
-        }
+        return days >= 0 && days < zeroToTen.length
+                ? zeroToTen[days]
+                : new IntegerDays(days);
     }
 
     private final int numDays;
