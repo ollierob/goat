@@ -64,6 +64,13 @@ public class IntegerMonths implements Months {
         return BigDecimal.valueOf(months);
     }
 
+    @Override
+    public Months plus(final Months that) {
+        return that instanceof IntegerMonths
+                ? this.plus((IntegerMonths) that)
+                : Months.super.plus(that);
+    }
+
     public IntegerMonths plus(final IntegerMonths that) {
         return ofNormalized(months + that.months);
     }
