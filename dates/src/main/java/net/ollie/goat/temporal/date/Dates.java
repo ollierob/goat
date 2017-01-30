@@ -3,6 +3,7 @@ package net.ollie.goat.temporal.date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import net.ollie.goat.functions.Functions;
 
@@ -12,7 +13,7 @@ import net.ollie.goat.functions.Functions;
  */
 public abstract class Dates {
 
-    public static double DAYS_PER_YEAR = 365.2425d;
+    public static double DAYS_PER_YEAR = 365.24225d;
 
     protected Dates() {
     }
@@ -55,6 +56,9 @@ public abstract class Dates {
 
             @Override
             public LocalDate next() {
+                if (!this.hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 LocalDate next = current;
                 current = next.plusDays(1);
                 return next;
