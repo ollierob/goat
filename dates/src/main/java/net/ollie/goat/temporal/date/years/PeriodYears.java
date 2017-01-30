@@ -2,10 +2,11 @@ package net.ollie.goat.temporal.date.years;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.time.Period;
 
 import javax.xml.bind.annotation.XmlAttribute;
+
+import net.ollie.goat.temporal.date.Dates;
 
 /**
  *
@@ -37,13 +38,8 @@ public class PeriodYears implements Years {
     }
 
     @Override
-    public Years times(final Number that, final RoundingMode rounding) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
     public BigDecimal decimalValue(final MathContext context) {
-        throw new UnsupportedOperationException(); //TODO
+        return BigDecimal.valueOf(Dates.approximateLength(period)).round(context);
     }
 
 }

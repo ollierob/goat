@@ -2,6 +2,7 @@ package net.ollie.goat.temporal.date.years;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoField;
@@ -46,6 +47,11 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
     @Override
     default Years plus(final Years that) {
         return new PeriodYears(this.toPeriod().plus(that.toPeriod()));
+    }
+
+    @Override
+    default Years times(final Number that, final RoundingMode rounding) {
+        return of(this.doubleValue() * that.doubleValue());
     }
 
     @Override
@@ -106,12 +112,22 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
         throw new UnsupportedOperationException(); //TODO
     }
 
-    static Years of(final int years) {
+    static IntegerYears of(final int years) {
         return IntegerYears.of(years);
     }
 
     static Years of(final long years) {
         return of(Math.toIntExact(years));
+    }
+
+    static Years of(final double years) {
+        return new DoubleYears(years);
+    }
+
+    static Years of(final Period period) {
+        return period.getDays() == 0 && period.getMonths() == 0
+                ? of(period.getMonths())
+                : new PeriodYears(period);
     }
 
 }

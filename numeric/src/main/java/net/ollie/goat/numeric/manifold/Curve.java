@@ -1,5 +1,7 @@
 package net.ollie.goat.numeric.manifold;
 
+import java.util.Collection;
+import java.util.Map.Entry;
 import java.util.NavigableMap;
 
 import javax.annotation.CheckForNull;
@@ -21,5 +23,17 @@ public interface Curve<X, Y> {
 
     @Nonnull
     NavigableMap<X, Y> toMap();
+
+    default Collection<X> xAxis() {
+        return this.toMap().keySet();
+    }
+
+    default Collection<Y> yAxis() {
+        return this.toMap().values();
+    }
+
+    default Collection<Entry<X, Y>> points() {
+        return this.toMap().entrySet();
+    }
 
 }

@@ -39,4 +39,15 @@ public abstract class Iterables {
         return true;
     }
 
+    public static <T extends Comparable<? super T>> boolean allEqual(final Iterable<T> iterable) {
+        final Iterator<T> iterator = iterable.iterator();
+        final T first = iterator.next();
+        while (iterator.hasNext()) {
+            if (!Objects.equals(first, iterator.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
