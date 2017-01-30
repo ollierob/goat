@@ -28,4 +28,15 @@ public abstract class Iterables {
         return common;
     }
 
+    public static <T extends Comparable<? super T>> boolean isIncreasing(final Iterable<T> iterable) {
+        T element = null;
+        for (final T next : iterable) {
+            if (element != null && element.compareTo(next) < 0) {
+                return false;
+            }
+            element = next;
+        }
+        return true;
+    }
+
 }
