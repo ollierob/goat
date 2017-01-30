@@ -1,5 +1,6 @@
 package net.ollie.goat.temporal;
 
+import java.time.Period;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
@@ -7,11 +8,17 @@ import java.time.temporal.TemporalField;
 import java.time.temporal.TemporalUnit;
 import java.time.temporal.UnsupportedTemporalTypeException;
 
+import javax.annotation.Nonnull;
+
 /**
+ * Bridge between {@link TemporalUnit} and {@link ChronoUnit}.
  *
  * @author Ollie
  */
 public interface ChronoTemporal extends Temporal {
+
+    @Nonnull
+    Period toPeriod();
 
     default ChronoUnit toChronoUnit(final TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {

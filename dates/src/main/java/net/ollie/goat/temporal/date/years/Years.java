@@ -24,6 +24,7 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
 
     Period toPeriod(double daysPerYear);
 
+    @Override
     default Period toPeriod() {
         return this.toPeriod(Dates.DAYS_PER_YEAR);
     }
