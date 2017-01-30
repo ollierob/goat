@@ -28,6 +28,10 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
         return this.toPeriod(Dates.DAYS_PER_YEAR);
     }
 
+    default int round(final MathContext context) {
+        return this.decimalValue(context).intValue();
+    }
+
     @Override
     default BigDecimal decimalValue(final MathContext context) {
         return BigDecimal.valueOf(Dates.approximateLength(this.toPeriod()));
