@@ -1,6 +1,11 @@
 package net.ollie.goat.numeric;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,36 +16,29 @@ import javax.annotation.Nullable;
  */
 public abstract class BigDecimals {
 
+    private static final Map<Class<?>, Function<Number, BigDecimal>> decimalConversions;
+    private static final Function<Number, BigDecimal> GENERIC_CONVERSION = n -> new BigDecimal(n.toString());
+
+    static {
+        final Map<Class<?>, Function<Number, BigDecimal>> funcs = new HashMap<>();
+        funcs.put(BigDecimal.class, n -> (BigDecimal) n);
+        funcs.put(BigInteger.class, n -> new BigDecimal((BigInteger) n));
+        funcs.put(Integer.class, n -> BigDecimal.valueOf(n.intValue()));
+        funcs.put(Long.class, n -> BigDecimal.valueOf(n.longValue()));
+        decimalConversions = Collections.unmodifiableMap(funcs);
+    }
+
     protected BigDecimals() {
     }
 
     @Nonnull
-    public static BigDecimal toBigDecimal(final int i) {
-        switch (i) {
-            case 0:
-                return BigDecimal.ZERO;
-            case 1:
-                return BigDecimal.ONE;
-            case 10:
-                return BigDecimal.TEN;
-            default:
-                return BigDecimal.valueOf(i);
-        }
-    }
-
-    @Nonnull
     public static BigDecimal toBigDecimal(@Nonnull final Number number) {
-        if (number instanceof Integer) {
-            return toBigDecimal((int) number);
-        }
-        return number instanceof BigDecimal
-                ? (BigDecimal) number
-                : new BigDecimal(number.toString());
+        return decimalConversions.getOrDefault(number.getClass(), GENERIC_CONVERSION).apply(number);
     }
 
     @Nonnull
-    public static boolean isOne(@Nonnull final BigDecimal number) {
-        return number == BigDecimal.ONE || number.compareTo(BigDecimal.ONE) == 0;
+    public static boolean isOne(@Nonnull final BigDecimal that) {
+        return that == BigDecimal.ONE || that.compareTo(BigDecimal.ONE) == 0;
     }
 
     public static boolean valuesEqual(@Nullable final BigDecimal b1, @Nullable final BigDecimal b2) {
