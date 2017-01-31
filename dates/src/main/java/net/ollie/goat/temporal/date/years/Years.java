@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.UnsupportedTemporalTypeException;
 
 import javax.annotation.Nonnull;
 
@@ -70,27 +71,27 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
 
     @Override
     default Years plus(final long amountToAdd, final ChronoUnit unit) {
-        final int unitsOfYears;
+        final long multiplier;
         switch (unit) {
             case YEARS:
-                unitsOfYears = 1;
+                multiplier = 1;
                 break;
             case DECADES:
-                unitsOfYears = 10;
+                multiplier = 10;
                 break;
             case CENTURIES:
-                unitsOfYears = 100;
+                multiplier = 100;
                 break;
             case MILLENNIA:
-                unitsOfYears = 1000;
+                multiplier = 1000;
                 break;
             case ERAS:
-                unitsOfYears = 1_000_000_000;
+                multiplier = 1_000_000_000;
                 break;
             default:
-                throw new UnsupportedOperationException();
+                throw new UnsupportedTemporalTypeException(unit.name());
         }
-        return this.plus(Years.of(amountToAdd * unitsOfYears));
+        return this.plus(Years.of(Math.multiplyExact(amountToAdd, multiplier)));
     }
 
     @Override
@@ -109,7 +110,7 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
             case YEAR:
                 return this.decimalValue().longValue();
         }
-        throw new UnsupportedOperationException(); //TODO
+        throw new UnsupportedTemporalTypeException(field.name());
     }
 
     static IntegerYears of(final int years) {

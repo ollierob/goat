@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.Period;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 
 import net.ollie.goat.numeric.Numbers;
 
@@ -27,7 +24,7 @@ public class IntegerDays implements Days {
     }
 
     public static IntegerDays of(final int days) {
-        return days >= 0 && days < minusOneToTen.length
+        return days >= -1 && days < minusOneToTen.length
                 ? minusOneToTen[days + 1]
                 : new IntegerDays(days);
     }
@@ -50,6 +47,10 @@ public class IntegerDays implements Days {
     @Override
     public IntegerDays negate() {
         return of(-days);
+    }
+
+    public IntegerDays plus(final IntegerDays that) {
+        return of(Math.addExact(days, that.days));
     }
 
     public IntegerDays times(final int that, final RoundingMode rounding) {
