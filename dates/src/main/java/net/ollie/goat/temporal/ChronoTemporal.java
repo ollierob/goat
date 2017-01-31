@@ -41,7 +41,7 @@ public interface ChronoTemporal extends Temporal {
         return this.plus(amountToAdd, this.toChronoUnit(unit));
     }
 
-    Temporal plus(long amountToAdd, ChronoUnit unit);
+    Temporal plus(long amountToAdd, ChronoUnit unit) throws UnsupportedTemporalTypeException;
 
     @Override
     @Deprecated
@@ -67,7 +67,7 @@ public interface ChronoTemporal extends Temporal {
         throw new UnsupportedTemporalTypeException("Field is not a chrono field: " + field);
     }
 
-    long getLong(ChronoField field);
+    long getLong(ChronoField field) throws UnsupportedTemporalTypeException;
 
     @Override
     @Deprecated

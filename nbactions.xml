@@ -8,8 +8,18 @@
             <goals>
                 <goal>clean</goal>
                 <goal>install</goal>
-                <goal>-T</goal>
-                <goal>4</goal>
+                <goal>-T2C</goal>
+                
+            </goals>
+        </action>
+        <action>
+            <actionName>build</actionName>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+                <goal>-T2C</goal>
             </goals>
         </action>
     </actions>

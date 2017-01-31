@@ -18,83 +18,56 @@ public class IntegerDays implements Days {
 
     private static final long serialVersionUID = 1L;
 
-    private static final IntegerDays[] zeroToTen = new IntegerDays[11];
+    private static final IntegerDays[] minusOneToTen = new IntegerDays[12];
 
     static {
-        for (int i = 0; i < zeroToTen.length; i++) {
-            zeroToTen[i] = new IntegerDays(i);
+        for (int i = -1; i < minusOneToTen.length; i++) {
+            minusOneToTen[i + 1] = new IntegerDays(i);
         }
     }
 
     public static IntegerDays of(final int days) {
-        return days >= 0 && days < zeroToTen.length
-                ? zeroToTen[days]
+        return days >= 0 && days < minusOneToTen.length
+                ? minusOneToTen[days + 1]
                 : new IntegerDays(days);
     }
 
-    private final int numDays;
+    private final int days;
 
     protected IntegerDays(final int numDays) {
-        this.numDays = numDays;
+        this.days = numDays;
     }
 
     public int value() {
-        return numDays;
+        return days;
     }
 
     @Override
     public Period toPeriod() {
-        return Period.ofDays(numDays);
+        return Period.ofDays(days);
     }
 
     @Override
     public IntegerDays negate() {
-        return of(-numDays);
+        return of(-days);
     }
 
     public IntegerDays times(final int that, final RoundingMode rounding) {
-        return of(numDays * that);
+        return of(Math.multiplyExact(days, that));
     }
 
     public IntegerDays over(final Number that, final RoundingMode rounding) {
-        return of(Numbers.round(numDays / that.doubleValue(), rounding));
+        return of(Numbers.round(days / that.doubleValue(), rounding));
     }
 
     @Override
     public BigDecimal decimalValue(final MathContext context) {
-        return BigDecimal.valueOf(numDays);
-    }
-
-    @Override
-    public boolean isSupported(final ChronoUnit unit) {
-        switch (unit) {
-            case HALF_DAYS:
-            case DAYS:
-            case WEEKS:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public Temporal plus(long amountToAdd, ChronoUnit unit) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public boolean isSupported(final ChronoField field) {
-        return false;
-    }
-
-    @Override
-    public long getLong(final ChronoField field) {
-        throw new UnsupportedOperationException(); //TODO
+        return BigDecimal.valueOf(days);
     }
 
     @Override
     public String toString() {
-        return numDays + " days";
+        return days + " days";
     }
 
 }

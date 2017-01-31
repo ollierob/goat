@@ -7,9 +7,6 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 
-import net.ollie.goat.optionals.Either;
-import net.ollie.goat.temporal.date.years.IntegerYears;
-
 /**
  *
  * @author ollie
@@ -18,13 +15,7 @@ public class IntegerMonths implements Months {
 
     private static final long serialVersionUID = 1L;
 
-    public static Either<IntegerMonths, IntegerYears> of(final int months) {
-        return months % 12 == 0
-                ? Either.right(IntegerYears.of(months / 12))
-                : Either.left(ofNormalized(months));
-    }
-
-    private static IntegerMonths ofNormalized(final int months) {
+    public static IntegerMonths of(final int months) {
         return new IntegerMonths(months);
     }
 
@@ -72,16 +63,16 @@ public class IntegerMonths implements Months {
     }
 
     public IntegerMonths plus(final IntegerMonths that) {
-        return ofNormalized(months + that.months);
+        return of(Math.addExact(months, that.months));
     }
 
     @Override
     public IntegerMonths negate() {
-        return ofNormalized(-months);
+        return of(-months);
     }
 
     public IntegerMonths times(final int that) {
-        return ofNormalized(Math.multiplyExact(months, that));
+        return of(Math.multiplyExact(months, that));
     }
 
 }

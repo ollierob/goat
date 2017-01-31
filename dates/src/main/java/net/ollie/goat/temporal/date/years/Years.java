@@ -120,11 +120,12 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
         return of(Math.toIntExact(years));
     }
 
-    static Years of(final double years) {
+    static DoubleYears of(final double years) {
         return new DoubleYears(years);
     }
 
-    static Years of(final Period period) {
+    static Years of(Period period) {
+        period = period.normalized();
         return period.getDays() == 0 && period.getMonths() == 0
                 ? of(period.getMonths())
                 : new PeriodYears(period);
