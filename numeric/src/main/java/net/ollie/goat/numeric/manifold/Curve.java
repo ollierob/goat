@@ -3,6 +3,7 @@ package net.ollie.goat.numeric.manifold;
 import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
+import java.util.Set;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -24,7 +25,7 @@ public interface Curve<X, Y> {
     @Nonnull
     NavigableMap<X, Y> toMap();
 
-    default Collection<X> xAxis() {
+    default Set<X> xAxis() {
         return this.toMap().keySet();
     }
 
