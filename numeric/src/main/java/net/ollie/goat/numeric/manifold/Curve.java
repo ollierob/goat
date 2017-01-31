@@ -37,4 +37,6 @@ public interface Curve<X, Y> {
         return this.toMap().entrySet();
     }
 
+    Curve<X, Y> plus(Curve<X, Y> that, Interpolator<X, Y> interpolator);
+
 }
