@@ -1,8 +1,11 @@
 package net.ollie.goat.collection;
 
+import java.util.AbstractSet;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  *
@@ -25,6 +28,22 @@ public class Sets {
         set.addAll(s1);
         set.addAll(s2);
         return set;
+    }
+
+    public static <F, T> Set<T> lazilyTransform(final Set<F> set, final Function<? super F, ? extends T> transformation) {
+        return new AbstractSet<T>() {
+
+            @Override
+            public Iterator<T> iterator() {
+                return Iterators.transform(set.iterator(), transformation);
+            }
+
+            @Override
+            public int size() {
+                return set.size();
+            }
+
+        };
     }
 
 }

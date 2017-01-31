@@ -36,7 +36,7 @@ public abstract class Maps {
 
             @Override
             public Set<Map.Entry<K, V2>> entrySet() {
-                throw new UnsupportedOperationException();
+                return Sets.lazilyTransform(in.entrySet(), entry -> new SimpleImmutableEntry<>(entry.getKey(), transform.apply(entry.getValue())));
             }
 
             @Override
@@ -51,6 +51,40 @@ public abstract class Maps {
         final Map<K, V2> out = new HashMap<>(in.size());
         in.forEach((k, v) -> out.put(k, transform.apply(v)));
         return out;
+    }
+
+    public static <K, V> Map<K, V> lazilyGenerateValues(final Set<K> keys, final Function<? super K, ? extends V> transform) {
+        return new AbstractMap<K, V>() {
+
+            @Override
+            public boolean containsKey(final Object key) {
+                return keys.contains(key);
+            }
+
+            @Override
+            public Set<K> keySet() {
+                return keys;
+            }
+
+            @Override
+            public V get(final Object key) {
+                return keys.contains(key)
+                        ? transform.apply((K) key)
+                        : null;
+            }
+
+            @Override
+            public Set<Map.Entry<K, V>> entrySet() {
+                return Sets.lazilyTransform(keys, key -> new SimpleImmutableEntry<>(key, transform.apply(key)));
+            }
+
+            @Override
+            public int size() {
+                return keys.size();
+            }
+
+        };
+
     }
 
 }
