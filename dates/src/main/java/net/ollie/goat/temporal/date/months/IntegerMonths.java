@@ -26,7 +26,7 @@ public class IntegerMonths implements Months {
     }
 
     @Override
-    public Period toPeriod() {
+    public Period period() {
         return Period.ofMonths(months);
     }
 

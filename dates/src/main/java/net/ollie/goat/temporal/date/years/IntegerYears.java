@@ -64,13 +64,13 @@ public class IntegerYears implements Years {
     }
 
     @Override
-    public Period toPeriod() {
+    public Period period() {
         return Period.ofYears(years);
     }
 
     @Override
     public Period toPeriod(final double daysPerYear) {
-        return this.toPeriod();
+        return this.period();
     }
 
 }

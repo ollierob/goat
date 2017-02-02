@@ -8,10 +8,10 @@ import java.time.Year;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-import org.apache.commons.math3.fraction.Fraction;
-
 import net.ollie.goat.temporal.date.years.FractionalYears;
 import net.ollie.goat.temporal.date.years.Years;
+
+import org.apache.commons.math3.fraction.Fraction;
 
 /**
  *

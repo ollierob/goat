@@ -28,7 +28,7 @@ public class PeriodYears implements Years {
     }
 
     @Override
-    public Period toPeriod() {
+    public Period period() {
         return period;
     }
 

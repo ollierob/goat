@@ -40,7 +40,7 @@ public class IntegerDays implements Days {
     }
 
     @Override
-    public Period toPeriod() {
+    public Period period() {
         return Period.ofDays(days);
     }
 

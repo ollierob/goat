@@ -27,7 +27,7 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
     Period toPeriod(double daysPerYear);
 
     @Override
-    default Period toPeriod() {
+    default Period period() {
         return this.toPeriod(Dates.DAYS_PER_YEAR);
     }
 
@@ -37,17 +37,17 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
 
     @Override
     default BigDecimal decimalValue(final MathContext context) {
-        return BigDecimal.valueOf(Dates.approximateLength(this.toPeriod()));
+        return BigDecimal.valueOf(Dates.approximateLength(this.period()));
     }
 
     @Nonnull
     default LocalDate addTo(final LocalDate date) {
-        return date.plus(this.toPeriod());
+        return date.plus(this.period());
     }
 
     @Override
     default Years plus(final Years that) {
-        return new PeriodYears(this.toPeriod().plus(that.toPeriod()));
+        return new PeriodYears(this.period().plus(that.period()));
     }
 
     @Override

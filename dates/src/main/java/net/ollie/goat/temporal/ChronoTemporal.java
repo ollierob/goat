@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 public interface ChronoTemporal extends Temporal {
 
     @Nonnull
-    Period toPeriod();
+    Period period();
 
     default ChronoUnit toChronoUnit(final TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {
