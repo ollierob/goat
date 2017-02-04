@@ -3,6 +3,9 @@ package net.ollie.goat.functions;
 import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Predicate;
+
+import javax.annotation.CheckForNull;
 
 import net.ollie.goat.suppliers.CheckedSupplier;
 
@@ -37,6 +40,13 @@ public final class Functions {
 
     public static <T, X extends Exception> T ifNull(final T object, final CheckedSupplier<? extends T, X> supplier) throws X {
         return object == null ? supplier.get() : object;
+    }
+
+    @CheckForNull
+    public static <T, R> R iff(final T input, final Predicate<? super T> predicate, final Function<? super T, ? extends R> transform) {
+        return predicate.test(input)
+                ? transform.apply(input)
+                : null;
     }
 
 }
