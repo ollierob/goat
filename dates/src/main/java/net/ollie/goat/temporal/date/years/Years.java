@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 
 import net.ollie.goat.numeric.Numeric;
 import net.ollie.goat.temporal.ChronoTemporal;
-import net.ollie.goat.temporal.date.Dates;
+import net.ollie.goat.temporal.date.Periods;
 
 /**
  *
@@ -28,7 +28,7 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
 
     @Override
     default Period period() {
-        return this.toPeriod(Dates.DAYS_PER_YEAR);
+        return this.toPeriod(Periods.DAYS_PER_YEAR);
     }
 
     default int round(final MathContext context) {
@@ -37,7 +37,7 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
 
     @Override
     default BigDecimal decimalValue(final MathContext context) {
-        return BigDecimal.valueOf(Dates.approximateLength(this.period()));
+        return BigDecimal.valueOf(Periods.approximateLength(this.period()));
     }
 
     @Nonnull

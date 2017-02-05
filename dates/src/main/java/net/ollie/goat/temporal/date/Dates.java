@@ -1,8 +1,6 @@
 package net.ollie.goat.temporal.date;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -14,20 +12,12 @@ import net.ollie.goat.functions.Functions;
  */
 public abstract class Dates {
 
-    public static double DAYS_PER_YEAR = 365.24225d;
-    public static final Comparator<Period> APPROXIMATE_PERIOD_COMPARATOR = (l, r) -> Double.compare(approximateLength(r), approximateLength(r));
-
     protected Dates() {
+        throw new AbstractMethodError();
     }
 
     public static boolean equals(final LocalDate left, final LocalDate right) {
         return Functions.ifBothNonNull(left, right, (final LocalDate l, final LocalDate r) -> l == r || l.compareTo(r) == 0);
-    }
-
-    public static double approximateLength(final Period period) {
-        return period.getYears()
-                + (period.getMonths() / 12.d)
-                + (period.getDays() / DAYS_PER_YEAR);
     }
 
     public static boolean areOrdered(final LocalDate d1, final LocalDate d2) {

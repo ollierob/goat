@@ -6,7 +6,7 @@ import java.time.Period;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import net.ollie.goat.temporal.date.Dates;
+import net.ollie.goat.temporal.date.Periods;
 
 /**
  *
@@ -39,12 +39,12 @@ public class PeriodYears implements Years {
 
     @Override
     public double doubleValue() {
-        return Dates.approximateLength(period);
+        return Periods.approximateLength(period);
     }
 
     @Override
     public BigDecimal decimalValue(final MathContext context) {
-        return BigDecimal.valueOf(Dates.approximateLength(period)).round(context);
+        return BigDecimal.valueOf(this.doubleValue()).round(context);
     }
 
 }
