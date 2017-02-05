@@ -3,6 +3,7 @@ package net.ollie.goat.temporal.date.count;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.MonthDay;
+import java.time.Period;
 import java.time.Year;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -27,6 +28,11 @@ public enum ActualActualDateArithmetic implements DateArithmetic, ActualDayCount
 
     private static final MonthDay JAN_1 = MonthDay.of(Month.JANUARY, 1);
     private static final MonthDay DEC_31 = MonthDay.of(Month.DECEMBER, 31);
+
+    @Override
+    public Period between(final LocalDate start, final LocalDate end) {
+        return Period.between(start, end);
+    }
 
     @Override
     public Years yearsBetween(final LocalDate startInclusive, final LocalDate endExclusive) {

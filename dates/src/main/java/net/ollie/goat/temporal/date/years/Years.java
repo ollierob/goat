@@ -31,8 +31,8 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
         return this.toPeriod(Periods.DAYS_PER_YEAR);
     }
 
-    default int round(final MathContext context) {
-        return this.decimalValue(context).intValue();
+    default int round(final RoundingMode rounding) {
+        return this.decimalValue().setScale(0, rounding).intValue();
     }
 
     @Override

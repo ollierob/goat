@@ -24,7 +24,7 @@ public interface DayCount {
     default OptionalInt daysIn(@Nonnull final Interim interim) {
         return interim.closed().map(this::daysIn).map(OptionalInt::of).orElse(OptionalInt.empty());
     }
-
+    
     ActualDayCount ACTUAL = ActualActualDateArithmetic.ACT_ACT;
 
 }

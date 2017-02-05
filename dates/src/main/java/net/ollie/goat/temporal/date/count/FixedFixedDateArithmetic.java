@@ -2,6 +2,7 @@ package net.ollie.goat.temporal.date.count;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
@@ -73,6 +74,12 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
     private FixedFixedDateArithmetic(final int daysPerMonth, final int daysPerYear) {
         this.daysPerMonth = daysPerMonth;
         this.daysPerYear = daysPerYear;
+    }
+
+    @Override
+    public Period between(LocalDate startInclusive, LocalDate endExclusive) {
+        final int days = this.daysBetween(startInclusive, endExclusive);
+        return Period.of(days % daysPerYear, 0, days / daysPerYear);
     }
 
     @Override

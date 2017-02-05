@@ -1,6 +1,8 @@
 package net.ollie.goat.temporal.date.count;
 
+import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.Period;
 
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,6 +29,13 @@ public class MixedDateArithmetic implements DateArithmetic {
     public MixedDateArithmetic(final DayCount dayCount, final YearCount yearCount) {
         this.dayCount = dayCount;
         this.yearCount = yearCount;
+    }
+
+    @Override
+    public Period between(final LocalDate startInclusive, final LocalDate endExclusive) {
+        final int days = dayCount.daysBetween(startInclusive, endExclusive);
+        final int years = yearCount.yearsBetween(startInclusive, endExclusive).round(RoundingMode.DOWN);
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

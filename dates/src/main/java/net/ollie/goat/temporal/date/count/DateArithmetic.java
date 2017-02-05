@@ -1,10 +1,17 @@
 package net.ollie.goat.temporal.date.count;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 /**
  *
  * @author Ollie
  */
 public interface DateArithmetic extends DayCount, YearCount {
+
+    default Period between(final LocalDate startInclusive, final LocalDate endExclusive) {
+        return Period.ofDays(this.daysBetween(startInclusive, endExclusive));
+    }
 
     DateArithmetic ACT_ACT = ActualActualDateArithmetic.ACT_ACT;
     DateArithmetic ACT_360 = ActualFixedDateArithmetic.ACT_360;
