@@ -77,9 +77,11 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
     }
 
     @Override
-    public Period between(LocalDate startInclusive, LocalDate endExclusive) {
+    public Period between(final LocalDate startInclusive, final LocalDate endExclusive) {
         final int days = this.daysBetween(startInclusive, endExclusive);
-        return Period.of(days % daysPerYear, 0, days / daysPerYear);
+        final int months = days / daysPerMonth;
+        final int years = days / daysPerYear;
+        return Period.of(days % daysPerYear, months % 12, years);
     }
 
     @Override
