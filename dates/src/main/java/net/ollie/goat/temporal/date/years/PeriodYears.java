@@ -38,6 +38,11 @@ public class PeriodYears implements Years {
     }
 
     @Override
+    public double doubleValue() {
+        return Dates.approximateLength(period);
+    }
+
+    @Override
     public BigDecimal decimalValue(final MathContext context) {
         return BigDecimal.valueOf(Dates.approximateLength(period)).round(context);
     }

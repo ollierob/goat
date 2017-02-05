@@ -128,7 +128,7 @@ public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summab
     static Years of(Period period) {
         period = period.normalized();
         return period.getDays() == 0 && period.getMonths() == 0
-                ? of(period.getMonths())
+                ? of(period.getYears())
                 : new PeriodYears(period);
     }
 
