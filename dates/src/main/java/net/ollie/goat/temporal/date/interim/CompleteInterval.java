@@ -48,7 +48,7 @@ public class CompleteInterval
 
     @Override
     public Comparator<? super LocalDate> comparator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Comparator.naturalOrder();
     }
 
     @Override

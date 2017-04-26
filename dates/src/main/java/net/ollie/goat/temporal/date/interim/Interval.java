@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- *
+ * 
  * @author ollie
  */
 public abstract class Interval
