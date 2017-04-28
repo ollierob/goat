@@ -18,6 +18,13 @@ public class FractionalPercentage extends Percentage {
 
     private static final long serialVersionUID = 1L;
 
+    public static Percentage of(final long numerator, final long denominator) {
+        final DecimalFraction fraction = DecimalFraction.of(numerator, denominator);
+        return fraction.isZero()
+                ? zero()
+                : new FractionalPercentage(fraction);
+    }
+
     public static Percentage of(final Number numerator, final Number denominator) {
         final DecimalFraction fraction = DecimalFraction.of(numerator, denominator);
         return fraction.isZero()
@@ -64,11 +71,6 @@ public class FractionalPercentage extends Percentage {
     @Override
     public double doubleValue() {
         return fraction.doubleValue();
-    }
-
-    @Override
-    public Percentage plus(Percentage that) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

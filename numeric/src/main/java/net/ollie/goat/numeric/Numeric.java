@@ -27,6 +27,10 @@ public interface Numeric<T extends Numeric<T>>
     @Nonnull
     T times(@Nonnull Number that, RoundingMode rounding);
 
+    default T times(final long that) {
+        return this.times(that, RoundingMode.UNNECESSARY);
+    }
+
     @Nonnull
     default T times(@Nonnull final Number that) {
         return this.times(that, RoundingMode.HALF_UP);

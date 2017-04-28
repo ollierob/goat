@@ -62,11 +62,6 @@ public class DecimalPercentage
     }
 
     @Override
-    public Percentage plus(final Percentage that) {
-        return new DecimalPercentage(value.add(that.decimalValue()));
-    }
-
-    @Override
     public Percentage times(final Number that, final RoundingMode rounding) {
         return this.times(that);
     }
