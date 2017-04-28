@@ -68,7 +68,7 @@ public class CompleteInterval
 
     @Override
     public LocalDate first() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.startInclusive();
     }
 
     @Override

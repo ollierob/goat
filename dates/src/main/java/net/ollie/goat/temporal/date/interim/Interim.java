@@ -17,7 +17,7 @@ public interface Interim {
     @Nonnull
     Optional<CompleteInterval> closed();
 
-    static CompleteInterval all(final YearMonth yearMonth) {
+    static CompleteInterval allOf(final YearMonth yearMonth) {
         return new CompleteInterval(yearMonth.atDay(1), yearMonth.atEndOfMonth());
     }
 
