@@ -33,19 +33,19 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
     THIRTY_THREESIXTY_ICMA(30, 360) {
 
         @Override
-        AdjustedDate adjustStart(LocalDate start, LocalDate end) {
+        AdjustedDayOfMonth adjustStart(LocalDate start, LocalDate end) {
             return this.adjust(end);
         }
 
         @Override
-        AdjustedDate adjustEnd(final LocalDate start, final LocalDate end) {
+        AdjustedDayOfMonth adjustEnd(final LocalDate start, final LocalDate end) {
             return this.adjust(start);
         }
 
-        private AdjustedDate adjust(final LocalDate date) {
+        private AdjustedDayOfMonth adjust(final LocalDate date) {
             return date.getDayOfMonth() == 31
-                    ? new AdjustedDate(date, 30)
-                    : new AdjustedDate(date);
+                    ? new AdjustedDayOfMonth(date, 30)
+                    : new AdjustedDayOfMonth(date);
         }
 
     },
@@ -53,17 +53,17 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
     THIRTY_THREESIXTY_ISDA(30, 360) {
 
         @Override
-        AdjustedDate adjustStart(final LocalDate start, final LocalDate end) {
+        AdjustedDayOfMonth adjustStart(final LocalDate start, final LocalDate end) {
             return isEndOfMonth(start)
-                    ? new AdjustedDate(start, 30)
-                    : new AdjustedDate(start);
+                    ? new AdjustedDayOfMonth(start, 30)
+                    : new AdjustedDayOfMonth(start);
         }
 
         @Override
-        AdjustedDate adjustEnd(final LocalDate start, final LocalDate end) {
+        AdjustedDayOfMonth adjustEnd(final LocalDate start, final LocalDate end) {
             return isEndOfMonth(end) && end.getMonth() != Month.FEBRUARY
-                    ? new AdjustedDate(end, 30)
-                    : new AdjustedDate(end);
+                    ? new AdjustedDayOfMonth(end, 30)
+                    : new AdjustedDayOfMonth(end);
         }
 
     };
@@ -85,21 +85,21 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
     }
 
     @Override
-    public int daysBetween(LocalDate startInclusive, LocalDate endExclusive) {
+    public int daysBetween(final LocalDate startInclusive, final LocalDate endInclusive) {
         return this.daysBetween(
-                this.adjustStart(startInclusive, endExclusive),
-                this.adjustEnd(startInclusive, endExclusive));
+                this.adjustStart(startInclusive, endInclusive),
+                this.adjustEnd(startInclusive, endInclusive));
     }
 
-    AdjustedDate adjustStart(final LocalDate start, final LocalDate end) {
-        return new AdjustedDate(start);
+    AdjustedDayOfMonth adjustStart(final LocalDate start, final LocalDate end) {
+        return new AdjustedDayOfMonth(start);
     }
 
-    AdjustedDate adjustEnd(final LocalDate start, final LocalDate end) {
-        return new AdjustedDate(end);
+    AdjustedDayOfMonth adjustEnd(final LocalDate start, final LocalDate end) {
+        return new AdjustedDayOfMonth(end);
     }
 
-    int daysBetween(final AdjustedDate start, final AdjustedDate end) {
+    int daysBetween(final AdjustedDayOfMonth start, final AdjustedDayOfMonth end) {
         return this.daysBetween(start.year(), end.year(), start.month(), end.month(), start.day(), end.day());
     }
 
@@ -119,16 +119,16 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
                 && date.getMonth() != date.plusDays(1).getMonth();
     }
 
-    static class AdjustedDate {
+    private static class AdjustedDayOfMonth {
 
         private final LocalDate date;
         private final int dayOfMonth;
 
-        AdjustedDate(final LocalDate date) {
+        AdjustedDayOfMonth(final LocalDate date) {
             this(date, date.getDayOfMonth());
         }
 
-        AdjustedDate(final LocalDate date, final int dayOfMonth) {
+        AdjustedDayOfMonth(final LocalDate date, final int dayOfMonth) {
             this.date = date;
             this.dayOfMonth = dayOfMonth;
         }
