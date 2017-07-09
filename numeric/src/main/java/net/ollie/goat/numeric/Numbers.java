@@ -1,7 +1,6 @@
 package net.ollie.goat.numeric;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 
 import javax.annotation.Nullable;
@@ -23,6 +22,17 @@ public abstract class Numbers {
 
     public static boolean isNativeIntegral(@Nullable final Number number) {
         return number instanceof Integer || number instanceof Long;
+    }
+
+    public static boolean isEffectiveIntegral(final Number number) {
+        if (number == null) {
+            return false;
+        }
+        if (isNativeIntegral(number)) {
+            return true;
+        }
+        final double d = number.doubleValue();
+        return d == Math.floor(d);
     }
 
     public static boolean isOne(@Nullable final Number number) {
