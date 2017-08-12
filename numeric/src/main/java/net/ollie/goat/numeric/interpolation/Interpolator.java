@@ -21,5 +21,5 @@ public interface Interpolator<K, V> {
     default Entry<K, V> interpolateEntry(final K key, final NavigableMap<K, V> map) {
         return Functions.ifNonNull(this.interpolate(key, map), value -> new SimpleImmutableEntry<>(key, value));
     }
-
+    
 }

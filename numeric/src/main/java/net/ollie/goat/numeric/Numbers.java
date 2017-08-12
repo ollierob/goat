@@ -28,10 +28,12 @@ public abstract class Numbers {
         if (number == null) {
             return false;
         }
-        if (isNativeIntegral(number)) {
-            return true;
-        }
-        final double d = number.doubleValue();
+        return isNativeIntegral(number)
+                ? true
+                : isIntegral(number.doubleValue());
+    }
+
+    public static boolean isIntegral(final double d) {
         return d == Math.floor(d);
     }
 
