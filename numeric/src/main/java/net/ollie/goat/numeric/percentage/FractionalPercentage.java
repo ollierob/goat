@@ -31,7 +31,7 @@ public class FractionalPercentage extends Percentage {
                 ? Percentage.zero()
                 : new FractionalPercentage(fraction);
     }
-
+    
     @XmlElement(name = "fraction")
     private DecimalFraction fraction;
 

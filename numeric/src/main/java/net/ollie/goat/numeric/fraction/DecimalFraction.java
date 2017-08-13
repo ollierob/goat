@@ -56,6 +56,16 @@ public class DecimalFraction
                 : new DecimalFraction(numerator, denominator);
     }
 
+    public static DecimalFraction of(final Number number) {
+        return number instanceof DecimalFraction
+                ? (DecimalFraction) number
+                : of(BigDecimals.toBigDecimal(number));
+    }
+
+    public static DecimalFraction of(final BigDecimal d) {
+        return new DecimalFraction(d, BigDecimal.ONE);
+    }
+
     @XmlAttribute(name = "numerator")
     private BigDecimal numerator;
 

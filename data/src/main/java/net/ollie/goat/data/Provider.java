@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -26,6 +27,14 @@ public interface Provider<K, V> {
     @Nonnull
     default V require(final K key) {
         return Objects.requireNonNull(this.get(key), () -> "Missing [" + key + "]!");
+    }
+
+    default <X extends Exception> V require(final K key, final Supplier<X> ifAbsent) throws X {
+        final V value = this.get(key);
+        if (value == null) {
+            throw ifAbsent.get();
+        }
+        return value;
     }
 
     default Map<K, V> getAll(final Set<K> keys) {

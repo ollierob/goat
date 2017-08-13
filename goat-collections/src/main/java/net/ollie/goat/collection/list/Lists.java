@@ -69,5 +69,5 @@ public abstract class Lists extends Collections {
                 ? java.util.Collections.emptyList()
                 : new LazyList<>(size, func);
     }
-
+    
 }
