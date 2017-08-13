@@ -102,6 +102,11 @@ public class DecimalFraction
                 && numerator.signum() != denominator.signum();
     }
 
+    public boolean isPositive() {
+        return !this.isZero()
+                && numerator.signum() == denominator.signum();
+    }
+
     public DecimalFraction plus(@Nonnull final Number number) {
         return number instanceof DecimalFraction
                 ? this.plus((DecimalFraction) number)
