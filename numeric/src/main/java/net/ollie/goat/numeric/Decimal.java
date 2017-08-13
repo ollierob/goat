@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import net.ollie.goat.numeric.fraction.DecimalFraction;
+
 /**
  *
  * @author ollie
@@ -93,6 +95,14 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
     @Override
     public Decimal times(final Number that, final RoundingMode rounding) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Decimal over(final int value) {
+        return new Decimal(this.value / value, dp);
+    }
+
+    public DecimalFraction over(final Number denominator) {
+        return DecimalFraction.of(this, denominator);
     }
 
     @Override
