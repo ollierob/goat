@@ -16,6 +16,8 @@ import javax.annotation.Nullable;
  */
 public abstract class BigDecimals {
 
+    public static BigDecimal TWO = BigDecimal.valueOf(2);
+    
     private static final Map<Class<?>, Function<Number, BigDecimal>> decimalConversions;
     private static final Function<Number, BigDecimal> GENERIC_CONVERSION = n -> new BigDecimal(n.toString());
 

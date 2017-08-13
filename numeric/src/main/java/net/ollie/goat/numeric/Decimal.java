@@ -62,12 +62,12 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
 
     @Override
     public float floatValue() {
-        return (float) value;
+        return (float) this.doubleValue();
     }
 
     @Override
     public double doubleValue() {
-        return value;
+        return Math.round(value * Math.pow(10, dp)) / Math.pow(10, dp);
     }
 
     @Override
