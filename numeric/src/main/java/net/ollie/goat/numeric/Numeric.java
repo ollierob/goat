@@ -41,6 +41,9 @@ public interface Numeric<T extends Numeric<T>>
         return this.times(BigDecimal.ONE.divide(toBigDecimal(that), context), context.getRoundingMode());
     }
 
+    @Nonnull
+    T inverse();
+
     /**
      *
      * @return the decimal value of this amount, if possible to exact precision, or

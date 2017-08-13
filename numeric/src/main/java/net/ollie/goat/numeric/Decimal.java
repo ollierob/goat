@@ -101,6 +101,11 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
         return new Decimal(this.value / value, dp);
     }
 
+    @Override
+    public Decimal inverse() {
+        return new Decimal(1 / value, dp);
+    }
+
     public DecimalFraction over(final Number denominator) {
         return DecimalFraction.of(this, denominator);
     }
