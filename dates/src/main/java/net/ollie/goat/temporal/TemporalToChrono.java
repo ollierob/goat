@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
  *
  * @author Ollie
  */
-public interface ChronoTemporal extends Temporal {
+public interface TemporalToChrono extends Temporal {
 
     @Nonnull
     Period period();

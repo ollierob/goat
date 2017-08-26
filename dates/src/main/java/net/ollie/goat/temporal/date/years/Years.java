@@ -12,14 +12,14 @@ import java.time.temporal.UnsupportedTemporalTypeException;
 import javax.annotation.Nonnull;
 
 import net.ollie.goat.numeric.Numeric;
-import net.ollie.goat.temporal.ChronoTemporal;
 import net.ollie.goat.temporal.date.Periods;
+import net.ollie.goat.temporal.TemporalToChrono;
 
 /**
  *
  * @author ollie
  */
-public interface Years extends ChronoTemporal, Comparable<Years>, Numeric.Summable<Years> {
+public interface Years extends TemporalToChrono, Comparable<Years>, Numeric.Summable<Years> {
 
     Years ZERO = IntegerYears.ZERO;
     Years ONE = IntegerYears.ONE;

@@ -3,7 +3,6 @@ package net.ollie.goat.numeric;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.stream.IntStream;
 
 import javax.annotation.Nonnull;
 
