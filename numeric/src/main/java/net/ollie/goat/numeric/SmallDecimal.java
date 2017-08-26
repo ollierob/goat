@@ -3,6 +3,9 @@ package net.ollie.goat.numeric;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.stream.IntStream;
+
+import javax.annotation.Nonnull;
 
 import net.ollie.goat.numeric.fraction.BigDecimalFraction;
 
@@ -14,7 +17,9 @@ import net.ollie.goat.numeric.fraction.BigDecimalFraction;
 public class SmallDecimal extends Number implements Numeric.Summable<SmallDecimal> {
 
     private static final long serialVersionUID = 1L;
-    private static final short SHORT_INT = 0;
+
+    private static final byte BYTE_ZERO = 0;
+    private static final int MAX_DP = 16;
 
     public static SmallDecimal valueOf(final Number number) {
         if (number instanceof SmallDecimal) {
@@ -29,25 +34,28 @@ public class SmallDecimal extends Number implements Numeric.Summable<SmallDecima
     }
 
     public static SmallDecimal valueOf(final long value) {
-        return new SmallDecimal(value, SHORT_INT);
+        return new SmallDecimal(value, BYTE_ZERO);
     }
 
     public static SmallDecimal valueOf(final BigDecimal decimal) {
-        return new SmallDecimal(decimal.doubleValue(), min(decimal.scale(), Short.MAX_VALUE));
+        return new SmallDecimal(decimal.doubleValue(), min(decimal.scale(), (byte) MAX_DP));
     }
 
     public static SmallDecimal integer(final double value) {
-        return new SmallDecimal((int) value, (short) 0);
+        return new SmallDecimal((int) value, (byte) 0);
     }
 
-    private static short min(final int s1, final short s2) {
-        return s1 < s2 ? (short) s1 : s2;
+    private static byte min(final int s1, final byte s2) {
+        return s1 < s2 ? (byte) s1 : s2;
     }
 
     private final double value;
-    private final short dp;
+    private final byte dp;
 
-    SmallDecimal(final double value, final short dp) {
+    SmallDecimal(final double value, final byte dp) {
+        if (dp < 0 || dp > MAX_DP) {
+            throw new IllegalArgumentException("Invalid number of decimal places!");
+        }
         this.value = value;
         this.dp = dp;
     }
@@ -72,9 +80,13 @@ public class SmallDecimal extends Number implements Numeric.Summable<SmallDecima
         return Math.round(value * Math.pow(10, dp)) / Math.pow(10, dp);
     }
 
+    private BigDecimal bd;
+
     @Override
     public BigDecimal decimalValue() {
-        return new BigDecimal(value).setScale(dp);
+        return bd == null
+                ? (bd = new BigDecimal(value).setScale(dp, RoundingMode.HALF_UP))
+                : bd;
     }
 
     @Override
@@ -84,7 +96,9 @@ public class SmallDecimal extends Number implements Numeric.Summable<SmallDecima
 
     @Override
     public SmallDecimal plus(final SmallDecimal that) {
-        return new SmallDecimal(value + that.value, (short) Math.max(dp, that.dp));
+        return that.isZero()
+                ? this
+                : new SmallDecimal(value + that.value, min(dp, that.dp));
     }
 
     @Override
@@ -113,6 +127,21 @@ public class SmallDecimal extends Number implements Numeric.Summable<SmallDecima
     @Override
     public String toString() {
         return this.decimalValue().toPlainString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof SmallDecimal
+                && this.equals((SmallDecimal) obj);
+    }
+
+    public boolean equals(@Nonnull final SmallDecimal that) {
+        return this.decimalValue().equals(that.decimalValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.decimalValue().hashCode();
     }
 
 }
