@@ -10,8 +10,6 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
 
     private static final long serialVersionUID = 1L;
 
-    public abstract boolean isNegative();
-
     @Override
     public Percentage plus(final Percentage that) {
         return new BigDecimalPercentage(this.decimalValue().add(that.decimalValue()));

@@ -20,6 +20,14 @@ public interface Numeric<T extends Numeric<T>>
         return this.decimalValue().signum() == 0;
     }
 
+    default boolean isPositive() {
+        return this.decimalValue().signum() > 0;
+    }
+
+    default boolean isNegative() {
+        return this.decimalValue().signum() < 0;
+    }
+
     default T negate() {
         return this.times(-1, RoundingMode.UNNECESSARY);
     }

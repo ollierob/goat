@@ -28,11 +28,6 @@ public class IntegerPercentage extends Percentage {
     }
 
     @Override
-    public boolean isNegative() {
-        return value < 0;
-    }
-
-    @Override
     public Percentage reciprocal() {
         return FractionalPercentage.of(1, value);
     }
@@ -81,6 +76,21 @@ public class IntegerPercentage extends Percentage {
     @Override
     public BigDecimal decimalValue(final MathContext context) {
         return new BigDecimal(this.doubleValue(), context);
+    }
+
+    @Override
+    public boolean isPositive() {
+        return value > 0;
+    }
+
+    @Override
+    public boolean isZero() {
+        return value == 0;
+    }
+
+    @Override
+    public boolean isNegative() {
+        return value < 0;
     }
 
     @Override
