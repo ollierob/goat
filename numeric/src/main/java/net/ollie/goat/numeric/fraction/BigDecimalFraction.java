@@ -16,8 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.ollie.goat.numeric.BigDecimals;
 import net.ollie.goat.numeric.Numeric;
-import net.ollie.goat.numeric.percentage.FractionalPercentage;
-import net.ollie.goat.numeric.percentage.Percentage;
 
 /**
  *
@@ -213,10 +211,6 @@ public class BigDecimalFraction
         final BigInteger d = denominator.unscaledValue();
         final BigInteger gcd = n.gcd(d);
         return gcd.compareTo(BigInteger.ONE) == 0;
-    }
-
-    public Percentage toPercentage() {
-        return new FractionalPercentage(this);
     }
 
     @Override

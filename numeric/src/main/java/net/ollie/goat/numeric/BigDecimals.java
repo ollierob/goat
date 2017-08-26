@@ -16,7 +16,8 @@ import javax.annotation.Nullable;
  */
 public abstract class BigDecimals {
 
-    public static BigDecimal TWO = BigDecimal.valueOf(2);
+    public static final BigDecimal TWO = BigDecimal.valueOf(2);
+    public static final BigDecimal ONE_HUNDRED = BigDecimal.ONE.movePointRight(2);
 
     private static final Map<Class<?>, Function<Number, BigDecimal>> decimalConversions;
 

@@ -4,30 +4,24 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
-
 /**
  *
  * @author ollie
  */
-@XmlRootElement
 public class IntegerPercentage extends Percentage {
 
-    public static final IntegerPercentage ZERO = new IntegerPercentage(0);
+    private static final long serialVersionUID = 1L;
+    public static final IntegerPercentage ZERO_PERCENT = new IntegerPercentage(0);
+    public static final IntegerPercentage ONE_PERCENT = new IntegerPercentage(1);
+    public static final IntegerPercentage ONE_HUNDRED_PERCENT = new IntegerPercentage(100);
 
-    public static IntegerPercentage of(final long value) {
-        return value == 0
-                ? ZERO
-                : new IntegerPercentage(value);
+    public static IntegerPercentage of(final long percent) {
+        return percent == 0
+                ? ZERO_PERCENT
+                : new IntegerPercentage(percent);
     }
 
-    @XmlValue
-    private long value;
-
-    @Deprecated
-    IntegerPercentage() {
-    }
+    private final long value;
 
     IntegerPercentage(final long value) {
         this.value = value;
@@ -45,22 +39,22 @@ public class IntegerPercentage extends Percentage {
 
     @Override
     public int intValue() {
-        return Math.toIntExact(value);
+        return Math.toIntExact(this.longValue());
     }
 
     @Override
     public long longValue() {
-        return value;
+        return value / 100;
     }
 
     @Override
     public float floatValue() {
-        return (float) value;
+        return (float) this.doubleValue();
     }
 
     @Override
     public double doubleValue() {
-        return value;
+        return value / 100d;
     }
 
     @Override
@@ -86,7 +80,12 @@ public class IntegerPercentage extends Percentage {
 
     @Override
     public BigDecimal decimalValue(final MathContext context) {
-        return BigDecimal.valueOf(value);
+        return new BigDecimal(this.doubleValue(), context);
+    }
+
+    @Override
+    public String toString() {
+        return value + "%";
     }
 
 }

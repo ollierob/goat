@@ -1,35 +1,24 @@
 package net.ollie.goat.numeric.percentage;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
-
 import net.ollie.goat.numeric.BigDecimals;
-import net.ollie.goat.numeric.Numbers;
 import net.ollie.goat.numeric.Numeric;
 
 /**
  *
  * @author Ollie
  */
-@XmlRootElement
-public class BigDecimalPercentage
-        extends Percentage
-        implements Externalizable {
+public class BigDecimalPercentage extends Percentage {
 
     private static final long serialVersionUID = 1L;
     public static final Percentage ZERO_PERCENT = new BigDecimalPercentage(BigDecimal.ZERO);
-    public static final Percentage ONE_BP = new BigDecimalPercentage(BigDecimal.ONE.movePointLeft(2));
-    public static final Percentage ONE_PERCENT = new BigDecimalPercentage(BigDecimal.ONE);
-    public static final Percentage ONE_HUNDRED_PERCENT = new BigDecimalPercentage(Numbers.ONE_HUNDRED);
+    public static final Percentage ONE_BP = new BigDecimalPercentage(BigDecimal.ONE.movePointLeft(4));
+    public static final Percentage ONE_PERCENT = new BigDecimalPercentage(BigDecimal.ONE.movePointLeft(2));
+    public static final Percentage ONE_HUNDRED_PERCENT = new BigDecimalPercentage(BigDecimal.ONE);
 
     public static Percentage basisPoints(final int amount) {
         switch (amount) {
@@ -38,26 +27,21 @@ public class BigDecimalPercentage
             case 1:
                 return ONE_BP;
             default:
-                return new BigDecimalPercentage(BigDecimal.valueOf(amount).movePointLeft(2));
+                return new BigDecimalPercentage(BigDecimal.valueOf(amount).movePointLeft(4));
         }
     }
 
-    @XmlValue
-    private BigDecimal value;
-
-    @Deprecated
-    BigDecimalPercentage() {
-    }
+    private final BigDecimal value;
 
     public BigDecimalPercentage(final int value) {
-        this(BigDecimal.valueOf(value));
+        this(BigDecimal.valueOf(value).movePointLeft(2));
     }
 
     public BigDecimalPercentage(final double value) {
-        this(BigDecimal.valueOf(value));
+        this(BigDecimal.valueOf(value / 100));
     }
 
-    public BigDecimalPercentage(final BigDecimal value) {
+    BigDecimalPercentage(final BigDecimal value) {
         this.value = value;
     }
 
@@ -75,12 +59,9 @@ public class BigDecimalPercentage
         return this.times(that.decimalValue());
     }
 
-//    public <T extends Numeric<T>> T times(final T that, final RoundingMode rounding) {
-//        return that.times(this.doubleValue(), rounding);
-//    }
     @Override
     public BigDecimal decimalValue() {
-        return value.movePointLeft(2);
+        return value;
     }
 
     @Override
@@ -119,11 +100,6 @@ public class BigDecimalPercentage
     }
 
     @Override
-    public String toString() {
-        return value + "%";
-    }
-
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.value);
@@ -134,16 +110,6 @@ public class BigDecimalPercentage
     public boolean equals(Object obj) {
         return obj instanceof Percentage
                 && this.valuesEqual((Percentage) obj);
-    }
-
-    @Override
-    public void writeExternal(final ObjectOutput out) throws IOException {
-        out.writeObject(value);
-    }
-
-    @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        value = (BigDecimal) in.readObject();
     }
 
 }

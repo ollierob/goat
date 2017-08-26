@@ -4,16 +4,12 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import net.ollie.goat.numeric.fraction.BigDecimalFraction;
 
 /**
  *
  * @author ollie
  */
-@XmlRootElement
 public class FractionalPercentage extends Percentage {
 
     private static final long serialVersionUID = 1L;
@@ -31,15 +27,10 @@ public class FractionalPercentage extends Percentage {
                 ? Percentage.zero()
                 : new FractionalPercentage(fraction);
     }
-    
-    @XmlElement(name = "fraction")
-    private BigDecimalFraction fraction;
 
-    @Deprecated
-    FractionalPercentage() {
-    }
+    private final BigDecimalFraction fraction;
 
-    public FractionalPercentage(final BigDecimalFraction fraction) {
+    FractionalPercentage(final BigDecimalFraction fraction) {
         this.fraction = fraction;
     }
 

@@ -14,7 +14,6 @@ import net.ollie.goat.functions.Functions;
  */
 public abstract class Numbers {
 
-    public static final BigDecimal ONE_HUNDRED = BigDecimal.ONE.movePointRight(2);
     private static final double DELTA = 1e-16;
 
     protected Numbers() {

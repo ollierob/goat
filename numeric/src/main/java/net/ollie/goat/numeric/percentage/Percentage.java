@@ -17,6 +17,11 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
         return new BigDecimalPercentage(this.decimalValue().add(that.decimalValue()));
     }
 
+    @Override
+    public String toString() {
+        return this.decimalValue().movePointRight(2) + "%";
+    }
+
     public static Percentage oneBasisPoint() {
         return BigDecimalPercentage.basisPoints(1);
     }
