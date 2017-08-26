@@ -47,4 +47,9 @@ public class PeriodYears implements Years {
         return BigDecimal.valueOf(this.doubleValue()).round(context);
     }
 
+    @Override
+    public Years inverse() {
+        return new DoubleYears(1 / doubleValue());
+    }
+
 }

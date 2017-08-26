@@ -14,40 +14,45 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlRootElement
 public class DoubleYears implements Years {
-
+    
     private static final long serialVersionUID = 1L;
-
+    
     @XmlValue
     private double years;
-
+    
     @Deprecated
     DoubleYears() {
     }
-
+    
     public DoubleYears(final double value) {
         this.years = value;
     }
-
+    
     @Override
     public DoubleYears plus(final Years that) {
         return new DoubleYears(years + that.doubleValue());
     }
-
+    
     @Override
     public DoubleYears times(final Number that, final RoundingMode rounding) {
         return new DoubleYears(years * that.doubleValue());
     }
-
+    
     @Override
     public BigDecimal decimalValue(final MathContext context) {
         return BigDecimal.valueOf(years).round(context);
     }
-
+    
     @Override
     public Period toPeriod(final double daysPerYear) {
         final int wholeYears = (int) years;
         final int wholeDays = (int) (daysPerYear * (years - wholeYears));
         return Period.of(wholeYears, 0, wholeDays);
     }
-
+    
+    @Override
+    public Years inverse() {
+        return new DoubleYears(1 / years);
+    }
+    
 }

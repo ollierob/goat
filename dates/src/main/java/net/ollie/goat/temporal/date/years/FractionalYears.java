@@ -7,8 +7,6 @@ import java.time.Period;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import net.ollie.goat.numeric.Numbers;
-
 import org.apache.commons.math3.fraction.Fraction;
 
 /**
@@ -84,6 +82,11 @@ public class FractionalYears implements Years {
         final int wholeYears = (int) total;
         final int wholeDays = (int) (daysPerYear * (total - wholeYears));
         return Period.of(wholeYears, 0, wholeDays);
+    }
+
+    @Override
+    public Years inverse() {
+        return new FractionalYears(years.reciprocal());
     }
 
 }

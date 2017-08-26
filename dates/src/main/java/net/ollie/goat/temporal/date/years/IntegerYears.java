@@ -73,4 +73,9 @@ public class IntegerYears implements Years {
         return this.period();
     }
 
+    @Override
+    public Years inverse() {
+        return FractionalYears.of(1, years);
+    }
+
 }
