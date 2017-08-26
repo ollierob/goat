@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 import net.ollie.goat.numeric.fraction.DecimalFraction;
 
 /**
+ * Fixed decimal number.
  *
  * @author ollie
  */
@@ -14,7 +15,6 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
 
     private static final long serialVersionUID = 1L;
     private static final short SHORT_INT = 0;
-    private static final short SHORT_DOUBLE = 16;
 
     public static Decimal valueOf(final Number number) {
         if (number instanceof Decimal) {
@@ -97,7 +97,7 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Decimal over(final int value) {
+    public Decimal over(final double value) {
         return new Decimal(this.value / value, dp);
     }
 

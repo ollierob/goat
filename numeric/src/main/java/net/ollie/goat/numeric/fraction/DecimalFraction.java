@@ -178,6 +178,7 @@ public class DecimalFraction
                 : this;
     }
 
+    @Override
     public DecimalFraction reciprocal() {
         return of(denominator, numerator);
     }

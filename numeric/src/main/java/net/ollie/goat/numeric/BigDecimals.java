@@ -24,11 +24,12 @@ public abstract class BigDecimals {
         final Map<Class<?>, Function<Number, BigDecimal>> funcs = new HashMap<>();
         funcs.put(BigDecimal.class, n -> (BigDecimal) n);
         funcs.put(BigInteger.class, n -> new BigDecimal((BigInteger) n));
-        funcs.put(Integer.class, n -> BigDecimal.valueOf(n.intValue()));
+        funcs.put(Integer.class, n -> toBigDecimal(n.intValue()));
         funcs.put(Short.class, n -> BigDecimal.valueOf(n.intValue()));
         funcs.put(Long.class, n -> BigDecimal.valueOf(n.longValue()));
         funcs.put(Double.class, n -> BigDecimal.valueOf(n.doubleValue()));
         funcs.put(Float.class, n -> BigDecimal.valueOf(n.floatValue()));
+        funcs.put(Decimal.class, d -> ((Decimal) d).decimalValue());
         decimalConversions = Collections.unmodifiableMap(funcs);
     }
 
@@ -54,6 +55,19 @@ public abstract class BigDecimals {
     public static boolean valuesEqual(@Nullable final BigDecimal b1, @Nullable final BigDecimal b2) {
         return b1 == b2
                 || (b1 != null && b2 != null && b1.compareTo(b2) == 0);
+    }
+
+    public static BigDecimal toBigDecimal(final int i) {
+        switch (i) {
+            case 0:
+                return BigDecimal.ZERO;
+            case 1:
+                return BigDecimal.ONE;
+            case 2:
+                return TWO;
+            default:
+                return BigDecimal.valueOf(i);
+        }
     }
 
 }
