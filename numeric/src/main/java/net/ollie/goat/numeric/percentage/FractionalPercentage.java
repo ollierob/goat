@@ -49,8 +49,8 @@ public class FractionalPercentage extends Percentage {
     }
 
     @Override
-    public FractionalPercentage inverse() {
-        return new FractionalPercentage(fraction.inverse());
+    public FractionalPercentage reciprocal() {
+        return new FractionalPercentage(fraction.reciprocal());
     }
 
     @Override

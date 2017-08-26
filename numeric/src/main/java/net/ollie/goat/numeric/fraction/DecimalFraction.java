@@ -42,7 +42,7 @@ public class DecimalFraction
             return ((DecimalFraction) numerator).over(denominator);
         }
         if (denominator instanceof DecimalFraction) {
-            return ((DecimalFraction) denominator).inverse().times(numerator);
+            return ((DecimalFraction) denominator).reciprocal().times(numerator);
         }
         return of(BigDecimals.toBigDecimal(numerator), BigDecimals.toBigDecimal(denominator));
     }
@@ -169,7 +169,7 @@ public class DecimalFraction
     }
 
     public DecimalFraction over(final DecimalFraction that) {
-        return this.times(that.inverse());
+        return this.times(that.reciprocal());
     }
 
     public DecimalFraction abs() {
@@ -178,7 +178,7 @@ public class DecimalFraction
                 : this;
     }
 
-    public DecimalFraction inverse() {
+    public DecimalFraction reciprocal() {
         return of(denominator, numerator);
     }
 

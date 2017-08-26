@@ -51,7 +51,7 @@ public class DoubleYears implements Years {
     }
     
     @Override
-    public Years inverse() {
+    public Years reciprocal() {
         return new DoubleYears(1 / years);
     }
     

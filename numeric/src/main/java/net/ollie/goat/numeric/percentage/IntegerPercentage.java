@@ -39,7 +39,7 @@ public class IntegerPercentage extends Percentage {
     }
 
     @Override
-    public Percentage inverse() {
+    public Percentage reciprocal() {
         return FractionalPercentage.of(1, value);
     }
 

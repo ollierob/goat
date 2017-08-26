@@ -42,7 +42,7 @@ public interface Numeric<T extends Numeric<T>>
     }
 
     @Nonnull
-    T inverse();
+    T reciprocal();
 
     /**
      *

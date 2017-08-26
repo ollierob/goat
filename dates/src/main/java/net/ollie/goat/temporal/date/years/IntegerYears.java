@@ -74,7 +74,7 @@ public class IntegerYears implements Years {
     }
 
     @Override
-    public Years inverse() {
+    public Years reciprocal() {
         return FractionalYears.of(1, years);
     }
 

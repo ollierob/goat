@@ -85,7 +85,7 @@ public class FractionalYears implements Years {
     }
 
     @Override
-    public Years inverse() {
+    public Years reciprocal() {
         return new FractionalYears(years.reciprocal());
     }
 

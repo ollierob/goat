@@ -15,7 +15,7 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
     public abstract boolean isNegative();
 
     @Nonnull
-    public abstract Percentage inverse();
+    public abstract Percentage reciprocal();
 
     @Override
     public Percentage plus(final Percentage that) {

@@ -12,7 +12,7 @@ public class DecimalPercentageTest {
 
     @Test
     public void testInverse() {
-        assertThat(DecimalPercentage.ZERO_PERCENT.inverse(), is(DecimalPercentage.ONE_HUNDRED_PERCENT));
+        assertThat(DecimalPercentage.ZERO_PERCENT.reciprocal(), is(DecimalPercentage.ONE_HUNDRED_PERCENT));
     }
 
 }

@@ -102,7 +102,7 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
     }
 
     @Override
-    public Decimal inverse() {
+    public Decimal reciprocal() {
         return new Decimal(1 / value, dp);
     }
 

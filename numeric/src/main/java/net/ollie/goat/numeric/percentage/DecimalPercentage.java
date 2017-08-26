@@ -114,7 +114,7 @@ public class DecimalPercentage
     }
 
     @Override
-    public Percentage inverse() {
+    public Percentage reciprocal() {
         return ONE_HUNDRED_PERCENT.minus(this);
     }
 
