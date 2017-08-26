@@ -29,7 +29,7 @@ public abstract class BigDecimals {
         funcs.put(Long.class, n -> BigDecimal.valueOf(n.longValue()));
         funcs.put(Double.class, n -> BigDecimal.valueOf(n.doubleValue()));
         funcs.put(Float.class, n -> BigDecimal.valueOf(n.floatValue()));
-        funcs.put(Decimal.class, d -> ((Decimal) d).decimalValue());
+        funcs.put(SmallDecimal.class, d -> ((SmallDecimal) d).decimalValue());
         decimalConversions = Collections.unmodifiableMap(funcs);
     }
 

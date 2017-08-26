@@ -11,14 +11,14 @@ import net.ollie.goat.numeric.fraction.BigDecimalFraction;
  *
  * @author ollie
  */
-public class Decimal extends Number implements Numeric.Summable<Decimal> {
+public class SmallDecimal extends Number implements Numeric.Summable<SmallDecimal> {
 
     private static final long serialVersionUID = 1L;
     private static final short SHORT_INT = 0;
 
-    public static Decimal valueOf(final Number number) {
-        if (number instanceof Decimal) {
-            return (Decimal) number;
+    public static SmallDecimal valueOf(final Number number) {
+        if (number instanceof SmallDecimal) {
+            return (SmallDecimal) number;
         }
         if (number instanceof BigDecimal) {
             return valueOf((BigDecimal) number);
@@ -28,16 +28,16 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
                 : valueOf(BigDecimal.valueOf(number.doubleValue()));
     }
 
-    public static Decimal valueOf(final long value) {
-        return new Decimal(value, SHORT_INT);
+    public static SmallDecimal valueOf(final long value) {
+        return new SmallDecimal(value, SHORT_INT);
     }
 
-    public static Decimal valueOf(final BigDecimal decimal) {
-        return new Decimal(decimal.doubleValue(), min(decimal.scale(), Short.MAX_VALUE));
+    public static SmallDecimal valueOf(final BigDecimal decimal) {
+        return new SmallDecimal(decimal.doubleValue(), min(decimal.scale(), Short.MAX_VALUE));
     }
 
-    public static Decimal integer(final double value) {
-        return new Decimal((int) value, (short) 0);
+    public static SmallDecimal integer(final double value) {
+        return new SmallDecimal((int) value, (short) 0);
     }
 
     private static short min(final int s1, final short s2) {
@@ -47,7 +47,7 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
     private final double value;
     private final short dp;
 
-    Decimal(final double value, final short dp) {
+    SmallDecimal(final double value, final short dp) {
         this.value = value;
         this.dp = dp;
     }
@@ -83,27 +83,27 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
     }
 
     @Override
-    public Decimal plus(final Decimal that) {
-        return new Decimal(value + that.value, (short) Math.max(dp, that.dp));
+    public SmallDecimal plus(final SmallDecimal that) {
+        return new SmallDecimal(value + that.value, (short) Math.max(dp, that.dp));
     }
 
     @Override
-    public Decimal negate() {
-        return new Decimal(-value, dp);
+    public SmallDecimal negate() {
+        return new SmallDecimal(-value, dp);
     }
 
     @Override
-    public Decimal times(final Number that, final RoundingMode rounding) {
+    public SmallDecimal times(final Number that, final RoundingMode rounding) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Decimal over(final double value) {
-        return new Decimal(this.value / value, dp);
+    public SmallDecimal over(final double value) {
+        return new SmallDecimal(this.value / value, dp);
     }
 
     @Override
-    public Decimal reciprocal() {
-        return new Decimal(1 / value, dp);
+    public SmallDecimal reciprocal() {
+        return new SmallDecimal(1 / value, dp);
     }
 
     public BigDecimalFraction over(final Number denominator) {
