@@ -1,7 +1,5 @@
 package net.ollie.goat.numeric.percentage;
 
-import javax.annotation.Nonnull;
-
 import net.ollie.goat.numeric.Numeric;
 
 /**
@@ -14,14 +12,11 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
 
     public abstract boolean isNegative();
 
-    @Nonnull
-    public abstract Percentage reciprocal();
-
     @Override
     public Percentage plus(final Percentage that) {
         return new DecimalPercentage(this.decimalValue().add(that.decimalValue()));
     }
-    
+
     public static Percentage oneBasisPoint() {
         return DecimalPercentage.basisPoints(1);
     }

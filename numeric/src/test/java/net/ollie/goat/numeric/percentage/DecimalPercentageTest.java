@@ -11,7 +11,7 @@ import org.junit.Test;
 public class DecimalPercentageTest {
 
     @Test
-    public void testInverse() {
+    public void testReciprocal() {
         assertThat(DecimalPercentage.ZERO_PERCENT.reciprocal(), is(DecimalPercentage.ONE_HUNDRED_PERCENT));
     }
 
