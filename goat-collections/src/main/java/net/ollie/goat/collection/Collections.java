@@ -1,5 +1,7 @@
 package net.ollie.goat.collection;
 
+import java.util.Collection;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 /**
@@ -18,6 +20,10 @@ public abstract class Collections {
             }
         }
         return false;
+    }
+
+    public static <T> T[] toArray(final Collection<T> collection, final IntFunction<T[]> arrayCreator) {
+        return collection.toArray(arrayCreator.apply(collection.size()));
     }
 
 }
