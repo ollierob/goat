@@ -21,15 +21,15 @@ import net.ollie.goat.numeric.Numeric;
  * @author Ollie
  */
 @XmlRootElement
-public class DecimalPercentage
+public class BigDecimalPercentage
         extends Percentage
         implements Externalizable {
 
     private static final long serialVersionUID = 1L;
-    public static final Percentage ZERO_PERCENT = new DecimalPercentage(BigDecimal.ZERO);
-    public static final Percentage ONE_BP = new DecimalPercentage(BigDecimal.ONE.movePointLeft(2));
-    public static final Percentage ONE_PERCENT = new DecimalPercentage(BigDecimal.ONE);
-    public static final Percentage ONE_HUNDRED_PERCENT = new DecimalPercentage(Numbers.ONE_HUNDRED);
+    public static final Percentage ZERO_PERCENT = new BigDecimalPercentage(BigDecimal.ZERO);
+    public static final Percentage ONE_BP = new BigDecimalPercentage(BigDecimal.ONE.movePointLeft(2));
+    public static final Percentage ONE_PERCENT = new BigDecimalPercentage(BigDecimal.ONE);
+    public static final Percentage ONE_HUNDRED_PERCENT = new BigDecimalPercentage(Numbers.ONE_HUNDRED);
 
     public static Percentage basisPoints(final int amount) {
         switch (amount) {
@@ -38,7 +38,7 @@ public class DecimalPercentage
             case 1:
                 return ONE_BP;
             default:
-                return new DecimalPercentage(BigDecimal.valueOf(amount).movePointLeft(2));
+                return new BigDecimalPercentage(BigDecimal.valueOf(amount).movePointLeft(2));
         }
     }
 
@@ -46,18 +46,18 @@ public class DecimalPercentage
     private BigDecimal value;
 
     @Deprecated
-    DecimalPercentage() {
+    BigDecimalPercentage() {
     }
 
-    public DecimalPercentage(final int value) {
+    public BigDecimalPercentage(final int value) {
         this(BigDecimal.valueOf(value));
     }
 
-    public DecimalPercentage(final double value) {
+    public BigDecimalPercentage(final double value) {
         this(BigDecimal.valueOf(value));
     }
 
-    public DecimalPercentage(final BigDecimal value) {
+    public BigDecimalPercentage(final BigDecimal value) {
         this.value = value;
     }
 
@@ -68,7 +68,7 @@ public class DecimalPercentage
 
     @Override
     public Percentage times(final Number that) {
-        return new DecimalPercentage(value.multiply(BigDecimals.toBigDecimal(that)));
+        return new BigDecimalPercentage(value.multiply(BigDecimals.toBigDecimal(that)));
     }
 
     public Percentage timesBy(final Numeric<?> that) {

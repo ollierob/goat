@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.ollie.goat.numeric.fraction.DecimalFraction;
+import net.ollie.goat.numeric.fraction.BigDecimalFraction;
 
 /**
  *
@@ -19,27 +19,27 @@ public class FractionalPercentage extends Percentage {
     private static final long serialVersionUID = 1L;
 
     public static Percentage of(final long numerator, final long denominator) {
-        final DecimalFraction fraction = DecimalFraction.of(numerator, denominator);
+        final BigDecimalFraction fraction = BigDecimalFraction.of(numerator, denominator);
         return fraction.isZero()
                 ? zero()
                 : new FractionalPercentage(fraction);
     }
 
     public static Percentage of(final Number numerator, final Number denominator) {
-        final DecimalFraction fraction = DecimalFraction.of(numerator, denominator);
+        final BigDecimalFraction fraction = BigDecimalFraction.of(numerator, denominator);
         return fraction.isZero()
                 ? Percentage.zero()
                 : new FractionalPercentage(fraction);
     }
     
     @XmlElement(name = "fraction")
-    private DecimalFraction fraction;
+    private BigDecimalFraction fraction;
 
     @Deprecated
     FractionalPercentage() {
     }
 
-    public FractionalPercentage(final DecimalFraction fraction) {
+    public FractionalPercentage(final BigDecimalFraction fraction) {
         this.fraction = fraction;
     }
 

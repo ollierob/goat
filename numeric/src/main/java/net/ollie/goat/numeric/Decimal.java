@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import net.ollie.goat.numeric.fraction.DecimalFraction;
+import net.ollie.goat.numeric.fraction.BigDecimalFraction;
 
 /**
  * Fixed decimal number.
@@ -106,8 +106,8 @@ public class Decimal extends Number implements Numeric.Summable<Decimal> {
         return new Decimal(1 / value, dp);
     }
 
-    public DecimalFraction over(final Number denominator) {
-        return DecimalFraction.of(this, denominator);
+    public BigDecimalFraction over(final Number denominator) {
+        return BigDecimalFraction.of(this, denominator);
     }
 
     @Override

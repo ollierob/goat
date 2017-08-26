@@ -14,19 +14,19 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
 
     @Override
     public Percentage plus(final Percentage that) {
-        return new DecimalPercentage(this.decimalValue().add(that.decimalValue()));
+        return new BigDecimalPercentage(this.decimalValue().add(that.decimalValue()));
     }
 
     public static Percentage oneBasisPoint() {
-        return DecimalPercentage.basisPoints(1);
+        return BigDecimalPercentage.basisPoints(1);
     }
 
     public static Percentage zero() {
-        return DecimalPercentage.ZERO_PERCENT;
+        return BigDecimalPercentage.ZERO_PERCENT;
     }
 
     public static Percentage oneHundred() {
-        return DecimalPercentage.ONE_HUNDRED_PERCENT;
+        return BigDecimalPercentage.ONE_HUNDRED_PERCENT;
     }
 
     public static Percentage of(final long percentage) {

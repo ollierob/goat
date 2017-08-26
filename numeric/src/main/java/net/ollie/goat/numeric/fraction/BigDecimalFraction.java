@@ -24,46 +24,46 @@ import net.ollie.goat.numeric.percentage.Percentage;
  * @author Ollie
  */
 @XmlRootElement
-public class DecimalFraction
+public class BigDecimalFraction
         extends Number
-        implements Numeric.Summable<DecimalFraction>, Externalizable {
+        implements Numeric.Summable<BigDecimalFraction>, Externalizable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final DecimalFraction MINUS_ONE = DecimalFraction.of(-1, 1);
-    public static final DecimalFraction ZERO = new DecimalFraction(BigDecimal.ZERO, BigDecimal.ONE);
+    public static final BigDecimalFraction MINUS_ONE = BigDecimalFraction.of(-1, 1);
+    public static final BigDecimalFraction ZERO = new BigDecimalFraction(BigDecimal.ZERO, BigDecimal.ONE);
 
-    public static DecimalFraction of(final long numerator, final long denominator) {
+    public static BigDecimalFraction of(final long numerator, final long denominator) {
         return of(BigDecimal.valueOf(numerator), BigDecimal.valueOf(denominator));
     }
 
-    public static DecimalFraction of(final Number numerator, final Number denominator) {
-        if (numerator instanceof DecimalFraction) {
-            return ((DecimalFraction) numerator).over(denominator);
+    public static BigDecimalFraction of(final Number numerator, final Number denominator) {
+        if (numerator instanceof BigDecimalFraction) {
+            return ((BigDecimalFraction) numerator).over(denominator);
         }
-        if (denominator instanceof DecimalFraction) {
-            return ((DecimalFraction) denominator).reciprocal().times(numerator);
+        if (denominator instanceof BigDecimalFraction) {
+            return ((BigDecimalFraction) denominator).reciprocal().times(numerator);
         }
         return of(BigDecimals.toBigDecimal(numerator), BigDecimals.toBigDecimal(denominator));
     }
 
-    public static DecimalFraction of(final BigDecimal numerator, final BigDecimal denominator) {
+    public static BigDecimalFraction of(final BigDecimal numerator, final BigDecimal denominator) {
         if (numerator.signum() == 0) {
             return ZERO;
         }
         return denominator.signum() < 0
-                ? new DecimalFraction(numerator.negate(), denominator.negate())
-                : new DecimalFraction(numerator, denominator);
+                ? new BigDecimalFraction(numerator.negate(), denominator.negate())
+                : new BigDecimalFraction(numerator, denominator);
     }
 
-    public static DecimalFraction of(final Number number) {
-        return number instanceof DecimalFraction
-                ? (DecimalFraction) number
+    public static BigDecimalFraction of(final Number number) {
+        return number instanceof BigDecimalFraction
+                ? (BigDecimalFraction) number
                 : of(BigDecimals.toBigDecimal(number));
     }
 
-    public static DecimalFraction of(final BigDecimal d) {
-        return new DecimalFraction(d, BigDecimal.ONE);
+    public static BigDecimalFraction of(final BigDecimal d) {
+        return new BigDecimalFraction(d, BigDecimal.ONE);
     }
 
     @XmlAttribute(name = "numerator")
@@ -73,10 +73,10 @@ public class DecimalFraction
     private BigDecimal denominator;
 
     @Deprecated
-    DecimalFraction() {
+    BigDecimalFraction() {
     }
 
-    DecimalFraction(final BigDecimal numerator, final BigDecimal denominator) {
+    BigDecimalFraction(final BigDecimal numerator, final BigDecimal denominator) {
         if (denominator.signum() == 0) {
             throw new ArithmeticException(numerator + "/" + denominator);
         }
@@ -107,79 +107,79 @@ public class DecimalFraction
                 && numerator.signum() == denominator.signum();
     }
 
-    public DecimalFraction plus(@Nonnull final Number number) {
-        return number instanceof DecimalFraction
-                ? this.plus((DecimalFraction) number)
+    public BigDecimalFraction plus(@Nonnull final Number number) {
+        return number instanceof BigDecimalFraction
+                ? this.plus((BigDecimalFraction) number)
                 : this.plus(BigDecimals.toBigDecimal(number));
     }
 
     @CheckReturnValue
-    public DecimalFraction plus(@Nonnull final BigDecimal bd) {
+    public BigDecimalFraction plus(@Nonnull final BigDecimal bd) {
         return of(numerator.add(bd.multiply(denominator)), denominator);
     }
 
     @Override
-    public DecimalFraction plus(final DecimalFraction that) {
+    public BigDecimalFraction plus(final BigDecimalFraction that) {
         return of(
                 this.numerator.multiply(that.denominator).add(that.numerator.multiply(this.denominator)),
                 this.denominator.multiply(that.denominator));
     }
 
     @Override
-    public DecimalFraction minus(final DecimalFraction that) {
+    public BigDecimalFraction minus(final BigDecimalFraction that) {
         return of(
                 this.numerator.multiply(that.denominator).subtract(that.numerator.multiply(this.denominator)),
                 this.denominator.multiply(that.denominator));
     }
 
     @Override
-    public DecimalFraction negate() {
+    public BigDecimalFraction negate() {
         return of(numerator.negate(), denominator);
     }
 
     @Override
     @Deprecated
-    public DecimalFraction times(final Number that, final RoundingMode rounding) {
+    public BigDecimalFraction times(final Number that, final RoundingMode rounding) {
         return this.times(that);
     }
 
     @Override
-    public DecimalFraction times(final Number number) {
-        return number instanceof DecimalFraction
-                ? this.times((DecimalFraction) number)
+    public BigDecimalFraction times(final Number number) {
+        return number instanceof BigDecimalFraction
+                ? this.times((BigDecimalFraction) number)
                 : this.times(BigDecimals.toBigDecimal(number));
     }
 
-    public DecimalFraction times(final BigDecimal decimal) {
+    public BigDecimalFraction times(final BigDecimal decimal) {
         return of(numerator.multiply(decimal), denominator);
     }
 
-    public DecimalFraction times(final DecimalFraction that) {
+    public BigDecimalFraction times(final BigDecimalFraction that) {
         return of(numerator.multiply(that.numerator), denominator.multiply(that.denominator));
     }
 
-    public DecimalFraction over(final Number number) {
-        return number instanceof DecimalFraction
-                ? this.over((DecimalFraction) number)
+    public BigDecimalFraction over(final Number number) {
+        return number instanceof BigDecimalFraction
+                ? this.over((BigDecimalFraction) number)
                 : this.over(BigDecimals.toBigDecimal(number));
     }
 
-    public DecimalFraction over(final BigDecimal decimal) {
+    public BigDecimalFraction over(final BigDecimal decimal) {
         return of(numerator, denominator.multiply(decimal));
     }
 
-    public DecimalFraction over(final DecimalFraction that) {
+    public BigDecimalFraction over(final BigDecimalFraction that) {
         return this.times(that.reciprocal());
     }
 
-    public DecimalFraction abs() {
+    public BigDecimalFraction abs() {
         return this.isNegative()
                 ? of(numerator.abs(), denominator.abs())
                 : this;
     }
 
     @Override
-    public DecimalFraction reciprocal() {
+    public BigDecimalFraction reciprocal() {
         return of(denominator, numerator);
     }
 
@@ -231,17 +231,17 @@ public class DecimalFraction
 
     @Override
     public boolean equals(final Object obj) {
-        return obj instanceof DecimalFraction
-                && this.valuesEqual((DecimalFraction) obj);
+        return obj instanceof BigDecimalFraction
+                && this.valuesEqual((BigDecimalFraction) obj);
     }
 
     @Override
-    public boolean valuesEqual(final DecimalFraction that) {
+    public boolean valuesEqual(final BigDecimalFraction that) {
         return this.minus(that).isZero();
     }
 
     @Override
-    public int compareTo(final DecimalFraction that) {
+    public int compareTo(final BigDecimalFraction that) {
         final BigDecimal n1 = this.numerator.multiply(that.denominator);
         final BigDecimal n2 = that.numerator.multiply(this.denominator);
         return n1.compareTo(n2);
