@@ -1,9 +1,14 @@
 package net.ollie.goat.optionals;
 
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Supplier;
+
+import javax.annotation.Nonnull;
+
+import net.ollie.goat.exceptions.Exceptions;
 
 /**
  *
@@ -38,6 +43,23 @@ public final class Optionals {
         return optional.isPresent()
                 ? optional
                 : supplier.get();
+    }
+
+    @Nonnull
+    public static <T> Optional<T> zeroOrOne(final Iterable<T> iterable) {
+        return zeroOrOne(iterable, () -> null);
+    }
+
+    @Nonnull
+    public static <T> Optional<T> zeroOrOne(final Iterable<T> iterable, @Nonnull final Supplier<T> defaultValue) {
+        final Iterator<T> iterator = iterable.iterator();
+        if (!iterator.hasNext()) {
+            return Optional.ofNullable(defaultValue.get());
+        }
+        iterator.next();
+        return iterator.hasNext()
+                ? Exceptions.throwIllegalArgumentException("More than one element inside [" + iterable + "]!")
+                : Optional.empty();
     }
 
 }
