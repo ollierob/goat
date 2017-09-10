@@ -8,8 +8,7 @@ import javax.annotation.Nonnull;
  *
  * @author ollie
  */
-public interface FiniteProvider<K, V>
-        extends Provider<K, V> {
+public interface FiniteProvider<K, V> extends Provider<K, V> {
 
     @Nonnull
     Map<K, V> getAll();

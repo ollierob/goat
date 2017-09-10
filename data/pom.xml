@@ -9,4 +9,11 @@
     <artifactId>goat-data</artifactId>
     <packaging>jar</packaging>
     <name>goat-data</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>goat-functions</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

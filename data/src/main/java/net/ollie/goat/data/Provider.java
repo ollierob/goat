@@ -10,6 +10,8 @@ import java.util.function.Function;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
+import net.ollie.goat.functions.Functions;
+
 /**
  *
  * @author Ollie
@@ -17,7 +19,12 @@ import javax.annotation.Nonnull;
 public interface Provider<K, V> {
 
     @CheckForNull
-    V get(K key);
+    Element<V> getElement(K key);
+
+    @CheckForNull
+    default V get(K key) {
+        return Functions.ifNonNull(this.getElement(key), Element::value);
+    }
 
     @Nonnull
     default Optional<V> maybeGet(final K key) {
