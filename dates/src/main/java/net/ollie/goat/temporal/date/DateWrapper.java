@@ -2,8 +2,6 @@ package net.ollie.goat.temporal.date;
 
 import java.time.LocalDate;
 
-import net.ollie.goat.temporal.date.HasDate;
-
 /**
  *
  * @author Ollie
