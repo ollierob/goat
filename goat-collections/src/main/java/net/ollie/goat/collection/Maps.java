@@ -53,6 +53,12 @@ public abstract class Maps {
         return out;
     }
 
+    public static <K, V> Map<K, V> eaglerlyGenerateValues(final Set<K> keys, final Function<? super K, ? extends V> transform) {
+        final Map<K, V> map = new HashMap<>(keys.size());
+        keys.forEach(key -> map.put(key, transform.apply(key)));
+        return map;
+    }
+
     public static <K, V> Map<K, V> lazilyGenerateValues(final Set<K> keys, final Function<? super K, ? extends V> transform) {
         return new AbstractMap<K, V>() {
 
