@@ -53,6 +53,10 @@ public interface HasDate {
         }
     }
 
+    default boolean is(final LocalDate date) {
+        return this.date().compareTo(date) == 0;
+    }
+
     static int compareByDate(final HasDate left, final HasDate right) {
         return left.date().compareTo(right.date());
     }
