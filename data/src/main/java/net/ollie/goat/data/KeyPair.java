@@ -9,7 +9,7 @@ public class KeyPair<L, R> {
     private final L left;
     private final R right;
 
-    public KeyPair(L a, R b) {
+    public KeyPair(final L a, final R b) {
         this.left = a;
         this.right = b;
     }

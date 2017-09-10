@@ -11,6 +11,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 import net.ollie.goat.functions.Functions;
+import net.ollie.goat.suppliers.Suppliers;
 
 /**
  *
@@ -24,6 +25,10 @@ public interface Provider<K, V> {
     @CheckForNull
     default V get(K key) {
         return Functions.ifNonNull(this.getElement(key), Element::value);
+    }
+
+    default V getOrDefault(@Nonnull final K key, final V defaultValue) {
+        return Suppliers.firstNonNull(this.get(key), defaultValue);
     }
 
     @Nonnull
