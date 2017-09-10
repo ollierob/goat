@@ -39,6 +39,20 @@ public interface HasDate {
         return MonthDay.of(date.getMonth(), date.getDayOfMonth());
     }
 
+    default boolean isOnWeekday() {
+        return !this.isOnWeekend();
+    }
+
+    default boolean isOnWeekend() {
+        switch (this.date().getDayOfWeek()) {
+            case SATURDAY:
+            case SUNDAY:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     static int compareByDate(final HasDate left, final HasDate right) {
         return left.date().compareTo(right.date());
     }
