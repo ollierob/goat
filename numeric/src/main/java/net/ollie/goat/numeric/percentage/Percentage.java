@@ -28,6 +28,10 @@ public abstract class Percentage extends Number implements Numeric.Summable<Perc
         return BigDecimalPercentage.ZERO_PERCENT;
     }
 
+    public static Percentage one() {
+        return BigDecimalPercentage.ONE_PERCENT;
+    }
+
     public static Percentage oneHundred() {
         return BigDecimalPercentage.ONE_HUNDRED_PERCENT;
     }
