@@ -2,7 +2,7 @@ package net.ollie.goat.data;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -37,8 +37,8 @@ public interface Provider<K, V> {
     }
 
     @Nonnull
-    default V require(final K key) {
-        return Objects.requireNonNull(this.get(key), () -> "Missing [" + key + "]!");
+    default V require(final K key) throws NoSuchElementException {
+        return this.require(key, k -> new NoSuchElementException("No value associated with key [" + k + "]!"));
     }
 
     @Nonnull
