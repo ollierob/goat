@@ -17,8 +17,8 @@
         <module>functions</module>
         <module>dates</module>
         <module>numeric</module>
-        <module>goat-collections</module>
         <module>data</module>
+        <module>collections</module>
     </modules>
     
     <dependencies>
