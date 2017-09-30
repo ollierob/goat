@@ -63,17 +63,11 @@ public abstract class DateWrapper implements HasDate, ChronoLocalDate {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         final DateWrapper other = (DateWrapper) obj;
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        return true;
+        return this.is(other.date);
     }
 
 }

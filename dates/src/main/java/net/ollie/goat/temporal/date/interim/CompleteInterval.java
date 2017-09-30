@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.SortedSet;
-import java.util.Spliterator;
+import java.util.stream.Stream;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -73,7 +73,7 @@ public class CompleteInterval
 
     @Override
     public LocalDate last() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.endInclusive();
     }
 
     @Override
@@ -82,13 +82,13 @@ public class CompleteInterval
     }
 
     @Override
-    public Spliterator<LocalDate> spliterator() {
-        return super.spliterator();
+    public Iterator<LocalDate> iterator() {
+        return this.stream().iterator();
     }
 
     @Override
-    public Iterator<LocalDate> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Stream<LocalDate> stream() {
+        return Stream.iterate(this.startInclusive(), date -> date.plusDays(1)).limit(this.size());
     }
 
 }
