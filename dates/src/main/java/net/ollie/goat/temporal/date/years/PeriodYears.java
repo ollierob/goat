@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.time.Period;
 
-import javax.xml.bind.annotation.XmlAttribute;
-
 import net.ollie.goat.temporal.date.Periods;
 
 /**
@@ -16,12 +14,7 @@ public class PeriodYears implements Years {
 
     private static final long serialVersionUID = 1L;
 
-    @XmlAttribute(name = "period")
-    private Period period;
-
-    @Deprecated
-    PeriodYears() {
-    }
+    private final Period period;
 
     public PeriodYears(final Period period) {
         this.period = period;

@@ -12,8 +12,8 @@ import java.time.temporal.UnsupportedTemporalTypeException;
 import javax.annotation.Nonnull;
 
 import net.ollie.goat.numeric.Numeric;
-import net.ollie.goat.temporal.date.Periods;
 import net.ollie.goat.temporal.TemporalToChrono;
+import net.ollie.goat.temporal.date.Periods;
 
 /**
  *
@@ -123,6 +123,10 @@ public interface Years extends TemporalToChrono, Comparable<Years>, Numeric.Summ
 
     static DoubleYears of(final double years) {
         return new DoubleYears(years);
+    }
+
+    static Years between(final LocalDate start, final LocalDate end) {
+        return of(Period.between(start, end));
     }
 
     static Years of(Period period) {
