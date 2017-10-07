@@ -19,6 +19,10 @@ public final class Suppliers {
         return object1 == null ? object2 : object1;
     }
 
+    public static <T> T firstNonNull(final T object, final Supplier<? extends T> supplier) {
+        return object == null ? supplier.get() : object;
+    }
+
     @Nonnull
     public static <T> T firstNonNull(@Nonnull final Supplier<? extends T> supplier, @Nonnull final T object) {
         requireNonNull(object);
