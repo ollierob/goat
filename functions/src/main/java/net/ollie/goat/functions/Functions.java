@@ -19,7 +19,11 @@ public final class Functions {
     }
 
     public static <T, R> R ifNonNull(final T object, final Function<? super T, ? extends R> transform) {
-        return object == null ? null : transform.apply(object);
+        return ifNonNull(object, transform, null);
+    }
+
+    public static <T, R> R ifNonNull(final T object, final Function<? super T, ? extends R> transform, final R valueIfNull) {
+        return object == null ? valueIfNull : transform.apply(object);
     }
 
     public static <T> boolean ifBothNonNull(final T left, final T right, final BiPredicate<T, T> ifBothNonNull) {
