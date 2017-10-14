@@ -1,6 +1,9 @@
 package net.ollie.goat.data;
 
+import java.util.function.Function;
+
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -26,6 +29,14 @@ public class Element<V> {
     @CheckForNull
     public V value() {
         return value;
+    }
+
+    @Nonnull
+    @CheckForNull
+    public <T> Element<T> map(final Function<? super V, ? extends T> transform) {
+        return value == null
+                ? (Element<T>) this
+                : ofNullable(transform.apply(value));
     }
 
 }
