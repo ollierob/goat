@@ -2,6 +2,7 @@ package net.ollie.goat.numeric;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.annotation.Nullable;
  */
 public abstract class BigDecimals {
 
+    public static final BigDecimal ONE = BigDecimal.ONE;
     public static final BigDecimal TWO = BigDecimal.valueOf(2);
     public static final BigDecimal ONE_HUNDRED = BigDecimal.ONE.movePointRight(2);
 
@@ -69,6 +71,10 @@ public abstract class BigDecimals {
             default:
                 return BigDecimal.valueOf(i);
         }
+    }
+
+    public static BigDecimal mean(final MathContext context, final BigDecimal d1, final BigDecimal d2) {
+        return d1.add(d2).divide(TWO, context);
     }
 
 }
