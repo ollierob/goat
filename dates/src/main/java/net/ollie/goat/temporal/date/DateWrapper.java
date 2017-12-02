@@ -1,29 +1,48 @@
 package net.ollie.goat.temporal.date;
 
-import java.time.LocalDate;
-import java.time.Period;
+import net.ollie.goat.temporal.PartialDateTime;
+
+import javax.annotation.Nonnull;
+import java.time.*;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.IsoChronology;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalField;
 import java.time.temporal.TemporalUnit;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
- *
  * @author Ollie
  */
-public abstract class DateWrapper implements HasDate, ChronoLocalDate {
+public abstract class DateWrapper implements PartialDateTime, ChronoLocalDate {
 
     private final LocalDate date;
+    private final ZoneId zoneId;
 
     protected DateWrapper(final LocalDate date) {
+        this(date, ZoneOffset.UTC);
+    }
+
+    protected DateWrapper(final LocalDate date, final ZoneId zoneId) {
         this.date = date;
+        this.zoneId = zoneId;
     }
 
     @Override
     public LocalDate date() {
         return date;
+    }
+
+    @Nonnull
+    @Override
+    public ZoneId zoneId() {
+        return zoneId;
+    }
+
+    @Override
+    public Optional<LocalTime> time() {
+        return Optional.empty();
     }
 
     @Override

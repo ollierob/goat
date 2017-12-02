@@ -2,18 +2,17 @@ package net.ollie.goat.temporal.time;
 
 import net.ollie.goat.temporal.date.HasDate;
 
+import javax.annotation.Nonnull;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-import javax.annotation.Nonnull;
-
 /**
  *
  * @author Ollie
  */
-public interface HasTime extends HasDate {
+public interface HasDateTime extends HasDate {
 
     @Nonnull
     Instant time();
@@ -33,7 +32,7 @@ public interface HasTime extends HasDate {
         return this.dateTime().toLocalDate();
     }
 
-    static int compareByTime(final HasTime left, final HasTime right) {
+    static int compareByTime(final HasDateTime left, final HasDateTime right) {
         return left.time().compareTo(right.time());
     }
 

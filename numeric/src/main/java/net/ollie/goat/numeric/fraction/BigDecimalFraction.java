@@ -1,5 +1,12 @@
 package net.ollie.goat.numeric.fraction;
 
+import net.ollie.goat.numeric.BigDecimals;
+import net.ollie.goat.numeric.Numeric;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -8,14 +15,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import net.ollie.goat.numeric.BigDecimals;
-import net.ollie.goat.numeric.Numeric;
 
 /**
  *
@@ -95,11 +94,13 @@ public class BigDecimalFraction
         return numerator.signum() == 0;
     }
 
+    @Override
     public boolean isNegative() {
         return !this.isZero()
                 && numerator.signum() != denominator.signum();
     }
 
+    @Override
     public boolean isPositive() {
         return !this.isZero()
                 && numerator.signum() == denominator.signum();
