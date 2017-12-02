@@ -9,11 +9,11 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public class DateTimeWrapper implements PartialDateTime {
+public abstract class DateTimeWrapper implements PartialDateTime {
 
     private final ZonedDateTime zonedDateTime;
 
-    public DateTimeWrapper(final ZonedDateTime zonedDateTime) {
+    protected DateTimeWrapper(final ZonedDateTime zonedDateTime) {
         this.zonedDateTime = zonedDateTime;
     }
 
@@ -46,4 +46,8 @@ public class DateTimeWrapper implements PartialDateTime {
         return zonedDateTime;
     }
 
+    @Override
+    public String toString() {
+        return zonedDateTime.toString();
+    }
 }

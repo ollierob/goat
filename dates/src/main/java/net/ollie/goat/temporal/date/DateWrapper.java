@@ -89,4 +89,8 @@ public abstract class DateWrapper implements PartialDateTime, ChronoLocalDate {
         return this.is(other.date);
     }
 
+    @Override
+    public String toString() {
+        return date.toString() + ":" + zoneId.toString();
+    }
 }
