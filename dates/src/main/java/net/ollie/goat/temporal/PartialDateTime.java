@@ -1,6 +1,5 @@
 package net.ollie.goat.temporal;
 
-import com.sun.istack.internal.NotNull;
 import net.ollie.goat.temporal.date.HasDate;
 
 import javax.annotation.Nonnull;
@@ -13,7 +12,7 @@ public interface PartialDateTime extends HasDate {
     @Nonnull
     LocalDate date();
 
-    @NotNull
+    @Nonnull
     Optional<LocalTime> time();
 
     @Nonnull
