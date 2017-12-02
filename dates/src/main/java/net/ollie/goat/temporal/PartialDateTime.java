@@ -25,4 +25,16 @@ public interface PartialDateTime extends HasDate {
         return this.time().map(time -> ZonedDateTime.of(this.date(), time, this.zoneId()));
     }
 
+    default ZonedDateTime toDateTimeOr(final LocalTime time) {
+        return this.toDateTime().orElseGet(() -> ZonedDateTime.of(this.date(), time, this.zoneId()));
+    }
+
+    default ZonedDateTime toDateTimeOrMidnight() {
+        return this.toDateTimeOr(LocalTime.MIDNIGHT);
+    }
+
+    default ZonedDateTime toDateTimeOrNoon() {
+        return this.toDateTimeOr(LocalTime.NOON);
+    }
+
 }
