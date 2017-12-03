@@ -4,9 +4,12 @@ import net.ollie.goat.temporal.date.HasDate;
 
 import javax.annotation.Nonnull;
 import java.time.*;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoPeriod;
+import java.time.chrono.IsoChronology;
 import java.util.Optional;
 
-public interface PartialDateTime extends HasDate {
+public interface PartialDateTime extends HasDate, ChronoLocalDate {
 
     @Override
     @Nonnull
@@ -37,4 +40,19 @@ public interface PartialDateTime extends HasDate {
         return this.toDateTimeOr(LocalTime.NOON);
     }
 
+    @Override
+    default IsoChronology getChronology() {
+        return this.date().getChronology();
+    }
+
+    @Override
+    default int lengthOfMonth() {
+        return this.date().lengthOfMonth();
+    }
+
+    @Override
+    default ChronoPeriod until(ChronoLocalDate endDateExclusive) {
+        return this.date().until(endDateExclusive);
+    }
+    
 }

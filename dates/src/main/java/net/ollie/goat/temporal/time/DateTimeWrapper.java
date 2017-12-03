@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalField;
+import java.time.temporal.TemporalUnit;
 import java.util.Optional;
 
 public abstract class DateTimeWrapper implements PartialDateTime {
@@ -47,7 +50,18 @@ public abstract class DateTimeWrapper implements PartialDateTime {
     }
 
     @Override
+    public long until(final Temporal endExclusive, final TemporalUnit unit) {
+        return zonedDateTime.until(endExclusive, unit);
+    }
+
+    @Override
+    public long getLong(final TemporalField field) {
+        return zonedDateTime.getLong(field);
+    }
+
+    @Override
     public String toString() {
         return zonedDateTime.toString();
     }
+
 }

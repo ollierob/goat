@@ -5,7 +5,6 @@ import net.ollie.goat.temporal.PartialDateTime;
 import javax.annotation.Nonnull;
 import java.time.*;
 import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.IsoChronology;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalField;
 import java.time.temporal.TemporalUnit;
@@ -15,7 +14,7 @@ import java.util.Optional;
 /**
  * @author Ollie
  */
-public abstract class DateWrapper implements PartialDateTime, ChronoLocalDate {
+public abstract class DateWrapper implements PartialDateTime {
 
     private final LocalDate date;
     private final ZoneId zoneId;
@@ -46,17 +45,7 @@ public abstract class DateWrapper implements PartialDateTime, ChronoLocalDate {
     }
 
     @Override
-    public IsoChronology getChronology() {
-        return date.getChronology();
-    }
-
-    @Override
-    public int lengthOfMonth() {
-        return date.lengthOfMonth();
-    }
-
-    @Override
-    public long until(Temporal endExclusive, TemporalUnit unit) {
+    public long until(final Temporal endExclusive, final TemporalUnit unit) {
         return date.until(endExclusive, unit);
     }
 
