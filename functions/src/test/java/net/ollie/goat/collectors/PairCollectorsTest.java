@@ -1,13 +1,13 @@
 package net.ollie.goat.collectors;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
-import static org.junit.Assert.assertThat;
-import org.junit.Test;
-
 import static net.ollie.goat.collectors.PairCollectors.pairs;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 /**
  *

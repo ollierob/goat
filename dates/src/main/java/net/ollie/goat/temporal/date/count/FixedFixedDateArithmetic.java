@@ -1,23 +1,18 @@
 package net.ollie.goat.temporal.date.count;
 
+import net.ollie.goat.temporal.date.years.FractionalYears;
+import net.ollie.goat.temporal.date.years.Years;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
-
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-
-import net.ollie.goat.temporal.date.years.FractionalYears;
-import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
  * @author ollie
  */
-@XmlEnum
 public enum FixedFixedDateArithmetic implements DateArithmetic {
 
-    @XmlEnumValue("30_360")
     THIRTY_360(30, 360) {
 
         @Override
@@ -29,7 +24,6 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
         }
 
     },
-    @XmlEnumValue("30_360_ICMA")
     THIRTY_THREESIXTY_ICMA(30, 360) {
 
         @Override
@@ -49,7 +43,6 @@ public enum FixedFixedDateArithmetic implements DateArithmetic {
         }
 
     },
-    @XmlEnumValue("30_360_ISDA")
     THIRTY_THREESIXTY_ISDA(30, 360) {
 
         @Override

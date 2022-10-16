@@ -1,29 +1,20 @@
 package net.ollie.goat.temporal.date.months;
 
+import net.ollie.goat.collection.Sets;
+
 import java.time.Month;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import net.ollie.goat.collection.Sets;
-
 /**
  *
  * @author ollie
  */
-@XmlRootElement
 public class SomeMonths implements Months {
 
-    @XmlElement(name = "month")
-    private Set<Month> months;
-
-    @Deprecated
-    SomeMonths() {
-    }
+    private final Set<Month> months;
 
     public SomeMonths(final Month... months) {
         this.months = Sets.asSet(months);

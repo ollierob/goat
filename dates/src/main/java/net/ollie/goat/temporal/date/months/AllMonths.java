@@ -1,17 +1,14 @@
 package net.ollie.goat.temporal.date.months;
 
+import net.ollie.goat.collection.Iterators;
+
 import java.time.Month;
 import java.util.Iterator;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
-import net.ollie.goat.collection.Iterators;
 
 /**
  *
  * @author ollie
  */
-@XmlRootElement
 public class AllMonths implements Months {
 
     @Override

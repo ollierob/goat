@@ -1,30 +1,19 @@
 package net.ollie.goat.temporal.date.count;
 
+import net.ollie.goat.temporal.date.years.Years;
+
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
-
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import net.ollie.goat.temporal.date.years.Years;
 
 /**
  *
  * @author ollie
  */
-@XmlRootElement
 public class MixedDateArithmetic implements DateArithmetic {
 
-    @XmlElementRef(name = "day_count")
-    private DayCount dayCount;
-
-    @XmlElementRef(name = "year_count")
-    private YearCount yearCount;
-
-    @Deprecated
-    MixedDateArithmetic() {
-    }
+    private final DayCount dayCount;
+    private final YearCount yearCount;
 
     public MixedDateArithmetic(final DayCount dayCount, final YearCount yearCount) {
         this.dayCount = dayCount;

@@ -1,19 +1,14 @@
 package net.ollie.goat.optionals;
 
-import net.ollie.goat.optionals.Either;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 import java.util.function.Consumer;
 
 import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  *

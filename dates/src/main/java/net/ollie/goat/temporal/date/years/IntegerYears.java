@@ -6,14 +6,10 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
-
 /**
  *
  * @author Ollie
  */
-@XmlRootElement
 public class IntegerYears implements Years {
 
     private static final long serialVersionUID = 1L;
@@ -32,12 +28,7 @@ public class IntegerYears implements Years {
         }
     }
 
-    @XmlValue
-    private int years;
-
-    @Deprecated
-    IntegerYears() {
-    }
+    private final int years;
 
     protected IntegerYears(final int years) {
         this.years = years;

@@ -1,29 +1,18 @@
 package net.ollie.goat.temporal.date.count;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.Period;
-import java.time.Year;
-
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-
 import net.ollie.goat.temporal.date.years.FractionalYears;
 import net.ollie.goat.temporal.date.years.Years;
-
 import org.apache.commons.math3.fraction.Fraction;
+
+import java.time.*;
 
 /**
  *
  * @author Ollie
  */
-@XmlEnum
 public enum ActualActualDateArithmetic implements DateArithmetic, ActualDayCount {
 
-    @XmlEnumValue("ACT_ACT")
     ACT_ACT,
-    @XmlEnumValue("ACT_ACT_ICMA")
     ACT_ACT_ICMA;
 
     private static final MonthDay JAN_1 = MonthDay.of(Month.JANUARY, 1);

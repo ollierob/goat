@@ -1,18 +1,20 @@
 package net.ollie.goat.numeric;
 
+import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- *
  * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class SmallDecimalTest {
 
     private static final byte ONE_DP = (byte) 1;
-    
+
     @Test
     public void testDecimalValue() {
         assertThat(new SmallDecimal(0.001, ONE_DP).decimalValue().toString(), is("0.0"));
@@ -29,8 +31,8 @@ public class SmallDecimalTest {
     public void testIsZero_Nines() {
         assertFalse(new SmallDecimal(0.9, ONE_DP).isZero());
         System.out.println(new SmallDecimal(0.09, ONE_DP).decimalValue());
-        assertFalse("0.09 -> BigDecimal should be zero", new SmallDecimal(0.09, ONE_DP).decimalValue().signum() == 0);
-        assertFalse("0.09 to 1dp should be zero", new SmallDecimal(0.09, ONE_DP).isZero());
+        assertFalse(new SmallDecimal(0.09, ONE_DP).decimalValue().signum() == 0);
+        assertFalse(new SmallDecimal(0.09, ONE_DP).isZero());
         assertTrue(new SmallDecimal(0.009, ONE_DP).isZero());
     }
 

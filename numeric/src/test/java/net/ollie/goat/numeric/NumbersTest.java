@@ -1,10 +1,11 @@
 package net.ollie.goat.numeric;
 
+import org.junit.jupiter.api.Test;
+
 import java.math.RoundingMode;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  *

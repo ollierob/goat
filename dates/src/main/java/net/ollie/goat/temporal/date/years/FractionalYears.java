@@ -1,13 +1,11 @@
 package net.ollie.goat.temporal.date.years;
 
+import org.apache.commons.math3.fraction.Fraction;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.Period;
-
-import javax.xml.bind.annotation.XmlElement;
-
-import org.apache.commons.math3.fraction.Fraction;
 
 /**
  *
@@ -23,12 +21,7 @@ public class FractionalYears implements Years {
         return new FractionalYears(new Fraction(numerator, denominator));
     }
 
-    @XmlElement(name = "years") //FIXME not marshalable
-    private Fraction years;
-
-    @Deprecated
-    FractionalYears() {
-    }
+    private final Fraction years;
 
     public FractionalYears(final Fraction years) {
         this.years = years;

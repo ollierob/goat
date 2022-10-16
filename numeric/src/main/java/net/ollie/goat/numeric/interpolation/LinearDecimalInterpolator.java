@@ -1,16 +1,13 @@
 package net.ollie.goat.numeric.interpolation;
 
-import java.math.BigDecimal;
-
-import javax.xml.bind.annotation.XmlTransient;
-
 import net.ollie.goat.numeric.fraction.BigDecimalFraction;
+
+import java.math.BigDecimal;
 
 /**
  *
  * @author ollie
  */
-@XmlTransient
 public abstract class LinearDecimalInterpolator<K, V>
         implements FirstOrderInterpolator<K, V>, DecimalInterpolator<K, V> {
 

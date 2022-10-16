@@ -1,11 +1,13 @@
 package net.ollie.goat.numeric.fraction;
 
+import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- *
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
@@ -44,16 +46,16 @@ public class BigDecimalFractionTest {
 
     @Test
     public void testIsReduced() {
-        assertTrue("1/2", BigDecimalFraction.of(1, 2).isReduced());
-        assertFalse("2/4", BigDecimalFraction.of(2, 4).isReduced());
-        assertTrue("1/3", BigDecimalFraction.of(1, 3).isReduced());
-        assertFalse("2/6", BigDecimalFraction.of(2, 6).isReduced());
-        assertTrue("-1/3", BigDecimalFraction.of(-1, 3).isReduced());
-        assertTrue("-1/3", BigDecimalFraction.of(1, -3).isReduced());
-        assertFalse("-2/3", BigDecimalFraction.of(-2, 6).isReduced());
-        assertFalse("-2/3", BigDecimalFraction.of(2, -6).isReduced());
-        assertFalse("4/8", BigDecimalFraction.of(4, 8).isReduced());
-        assertTrue("3/7", BigDecimalFraction.of(3, 7).isReduced());
+        assertTrue(BigDecimalFraction.of(1, 2).isReduced());
+        assertFalse(BigDecimalFraction.of(2, 4).isReduced());
+        assertTrue(BigDecimalFraction.of(1, 3).isReduced());
+        assertFalse(BigDecimalFraction.of(2, 6).isReduced());
+        assertTrue(BigDecimalFraction.of(-1, 3).isReduced());
+        assertTrue(BigDecimalFraction.of(1, -3).isReduced());
+        assertFalse(BigDecimalFraction.of(-2, 6).isReduced());
+        assertFalse(BigDecimalFraction.of(2, -6).isReduced());
+        assertFalse(BigDecimalFraction.of(4, 8).isReduced());
+        assertTrue(BigDecimalFraction.of(3, 7).isReduced());
     }
 
 }

@@ -4,16 +4,17 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Optional;
 
-import javax.xml.bind.annotation.XmlAttribute;
-
 /**
  *
  * @author ollie
  */
 public class MonthYearInterval implements Interim {
 
-    @XmlAttribute(name = "yearMonth")
-    private YearMonth yearMonth;
+    private final YearMonth yearMonth;
+
+    public MonthYearInterval(YearMonth yearMonth) {
+        this.yearMonth = yearMonth;
+    }
 
     @Override
     public boolean contains(final LocalDate date) {
